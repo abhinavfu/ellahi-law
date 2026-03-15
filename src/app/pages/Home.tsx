@@ -178,50 +178,84 @@ function TrustStat({
 }
 
 function ServiceCard({ service, index }: { service: (typeof SERVICES)[0]; index: number }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [flipped, setFlipped] = useState(false);
   const Icon = service.icon;
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 28 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className="bg-white rounded-xl p-7 shadow-sm border border-gray-100 flex flex-col group cursor-pointer"
+    <div
+      className="perspective-[1200px] cursor-pointer"
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+      onClick={() => setFlipped(!flipped)}
     >
-      <div
-        className="w-11 h-11 rounded-lg flex items-center justify-center mb-5 transition-colors duration-200"
-        style={{ backgroundColor: "#EBF5FC" }}
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0, rotateY: flipped ? 180 : 0 }}
+        transition={{
+          opacity: { duration: 0.5, delay: index * 0.1 },
+          y: { duration: 0.5, delay: index * 0.1 },
+          rotateY: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+        }}
+        className="relative w-full h-[260px] rounded-xl"
+        style={{
+          transformStyle: "preserve-3d",
+        }}
       >
-        <Icon size={20} style={{ color: BLUE }} />
-      </div>
-      <h3
-        className="text-lg font-semibold mb-2.5"
-        style={{ fontFamily: '"Playfair Display", serif', color: NAVY }}
-      >
-        {service.title}
-      </h3>
-      <p className="text-sm leading-relaxed mb-4" style={{ color: "#5A6A7A" }}>
-        {service.desc}
-      </p>
-      <ul className="space-y-1.5 mb-6">
-        {service.items.map((item) => (
-          <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "#5A6A7A" }}>
-            <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: BLUE }} />
-            {item}
-          </li>
-        ))}
-      </ul>
-      <Link
-        to={service.href}
-        className="mt-auto flex items-center gap-1.5 text-sm font-medium transition-all duration-200 group-hover:gap-2.5"
-        style={{ color: BLUE }}
-      >
-        Learn More <ArrowRight size={14} />
-      </Link>
-    </motion.div>
+        {/* FRONT */}
+        <div
+          className="absolute inset-0 bg-white rounded-xl p-7 shadow-sm border border-gray-100 flex flex-col items-center justify-center"
+          style={{
+            backfaceVisibility: "hidden",
+          }}
+        >
+          <div
+            className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
+            style={{ backgroundColor: "#EBF5FC" }}
+          >
+            <Icon size={22} style={{ color: BLUE }} />
+          </div>
+
+          <h3
+            className="text-lg font-semibold text-center"
+            style={{
+              fontFamily: '"Playfair Display", serif',
+              color: NAVY,
+            }}
+          >
+            {service.title}
+          </h3>
+        </div>
+
+        {/* BACK */}
+        <div
+          className="absolute inset-0 bg-white rounded-xl p-7 shadow-sm border border-gray-100 flex flex-col"
+          style={{
+            transform: "rotateY(180deg)",
+            backfaceVisibility: "hidden",
+          }}
+        >
+          <p className="text-sm leading-relaxed mb-4" style={{ color: "#5A6A7A" }}>
+            {service.desc}
+          </p>
+
+          <ul className="space-y-1.5 mb-4">
+            {service.items.map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-2 text-sm"
+                style={{ color: "#5A6A7A" }}
+              >
+                <div
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{ backgroundColor: BLUE }}
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
