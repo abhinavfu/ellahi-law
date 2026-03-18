@@ -2,3 +2,7 @@
 @source '../**/*.{js,ts,jsx,tsx}';
 
 @import 'tw-animate-css';
+
+.perspective-\[1200px\] {
+  perspective: 1200px;
+}

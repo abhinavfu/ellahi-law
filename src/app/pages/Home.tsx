@@ -926,7 +926,7 @@ export function Home() {
                 ))}
               </ul>
               <Link
-                to="#" // /about
+                to="/about" 
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md text-sm font-medium text-white transition-all hover:opacity-90"
                 style={{ backgroundColor: NAVY }}
               >
