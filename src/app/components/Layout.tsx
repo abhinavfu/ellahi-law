@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Outlet, Link, useLocation } from "react-router";
+import { useState, useEffect, useRef } from "react";
+import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Phone,
@@ -10,7 +10,14 @@ import {
   ChevronDown,
   Linkedin,
   Facebook,
+  LogOut,
+  LayoutDashboard,
+  BookOpen,
+  User,
 } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import { toast } from "sonner";
+import { EMAIL, EMAIL_href, PHONE, PHONE_href, SOCIAL_facebook, SOCIAL_linkedin, TITLE } from "../../config/config";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -19,36 +26,26 @@ const NAV_LINKS = [
     label: "Services",
     href: "#",
     children: [
-      { label: "Real Estate Law", href: "#" },
-      { label: "Business & Corporate Law", href: "#" },
-      { label: "Civil Litigation", href: "#" },
-      { label: "Wills & Estates", href: "#" },
+      { label: "Real Estate Law", href: "/real-estate" },
+      { label: "Business & Corporate Law", href: "/business-law" },
+      { label: "Civil Litigation", href: "/civil-litigation" },
+      { label: "Wills & Estates", href: "/wills-estates" },
     ],
   },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
-// const NAV_LINKS = [
-//   { label: "Home", href: "/" },
-//   { label: "About", href: "/about" },
-//   {
-//     label: "Services",
-//     href: "#",
-//     children: [
-//       { label: "Real Estate Law", href: "/real-estate" },
-//       { label: "Business & Corporate Law", href: "/business-law" },
-//       { label: "Civil Litigation", href: "/civil-litigation" },
-//       { label: "Wills & Estates", href: "/wills-estates" },
-//     ],
-//   },
-//   { label: "Contact", href: "/contact" },
-// ];
 
 export function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -59,7 +56,25 @@ export function Layout() {
   useEffect(() => {
     setMenuOpen(false);
     setServicesOpen(false);
+    setUserMenuOpen(false);
   }, [location]);
+
+  // Close user menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    toast.success("You've been signed out.");
+    navigate("/");
+  };
 
   return (
     <div className="min-h-screen flex flex-col" style={{ fontFamily: "Inter, sans-serif" }}>
@@ -67,20 +82,20 @@ export function Layout() {
       <div style={{ backgroundColor: "#0A2540" }} className="py-2 px-4 hidden md:block">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-6 text-sm text-white/80">
-            <a href="tel:+14165550123" className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <a href={PHONE_href} className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone size={13} />
-              <span>(416) 555-0123</span>
+              <span>{PHONE}</span>
             </a>
-            <a href="mailto:info@ellahilaw.ca" className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <a href={EMAIL_href} className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Mail size={13} />
-              <span>info@ellahilaw.ca</span>
+              <span>{EMAIL}</span>
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="#" aria-label="LinkedIn" className="text-white/60 hover:text-white transition-colors">
+            <a href={SOCIAL_linkedin} aria-label="LinkedIn" className="text-white/60 hover:text-white transition-colors">
               <Linkedin size={15} />
             </a>
-            <a href="#" aria-label="Facebook" className="text-white/60 hover:text-white transition-colors">
+            <a href={SOCIAL_facebook} aria-label="Facebook" className="text-white/60 hover:text-white transition-colors">
               <Facebook size={15} />
             </a>
           </div>
@@ -157,11 +172,13 @@ export function Layout() {
                     to={link.href}
                     className="relative px-4 py-2 text-sm font-medium transition-colors"
                     style={{
-                      color: location.pathname === link.href ? "#2D9CDB" : "#1A1A1A",
+                      color: location.pathname === link.href || location.pathname.startsWith(link.href + "/") && link.href !== "/"
+                        ? "#2D9CDB"
+                        : "#1A1A1A",
                     }}
                   >
                     {link.label}
-                    {location.pathname === link.href && (
+                    {(location.pathname === link.href || (link.href !== "/" && location.pathname.startsWith(link.href))) && (
                       <motion.div
                         layoutId="nav-underline"
                         className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full"
@@ -173,25 +190,87 @@ export function Layout() {
               )}
             </nav>
 
-            {/* CTA */}
+            {/* Desktop CTA + Auth */}
             <div className="hidden lg:flex items-center gap-3">
-              <a
-                href="tel:+14165550123"
-                className="text-sm font-medium flex items-center gap-1.5 transition-colors"
-                style={{ color: "#5A6A7A" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#0A2540")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#5A6A7A")}
-              >
-                <Phone size={14} />
-                (416) 555-0123
-              </a>
-              <Link
-                to="/contact"
-                className="px-5 py-2.5 rounded text-sm font-medium text-white transition-all duration-200 hover:opacity-90 hover:-translate-y-px"
-                style={{ backgroundColor: "#0A2540" }}
-              >
-                Book Consultation
-              </Link>
+              {user ? (
+                /* User avatar + dropdown */
+                <div ref={userMenuRef} className="relative">
+                  <button
+                    onClick={() => setUserMenuOpen(!userMenuOpen)}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors"
+                  >
+                    <div
+                      className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
+                      style={{ backgroundColor: "#2D9CDB" }}
+                    >
+                      {user.fullName.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-sm font-medium max-w-[100px] truncate" style={{ color: "#0A2540" }}>
+                      {user.fullName.split(" ")[0]}
+                    </span>
+                    <ChevronDown
+                      size={13}
+                      className={`transition-transform text-gray-400 ${userMenuOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {userMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.18 }}
+                        className="absolute top-full right-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden"
+                      >
+                        <div className="px-4 py-3 border-b border-gray-100">
+                          <p className="text-sm font-medium text-gray-800 truncate">{user.fullName}</p>
+                          <p className="text-xs text-gray-400 truncate">{user.email}</p>
+                        </div>
+                        <Link
+                          to="/dashboard"
+                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        >
+                          <LayoutDashboard size={14} />
+                          My Dashboard
+                        </Link>
+                        <Link
+                          to="/blog"
+                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        >
+                          <BookOpen size={14} />
+                          Blog
+                        </Link>
+                        <div className="border-t border-gray-100">
+                          <button
+                            onClick={handleLogout}
+                            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors"
+                          >
+                            <LogOut size={14} />
+                            Sign Out
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="px-4 py-2 rounded text-sm font-medium border border-gray-200 transition-all hover:border-blue-300 hover:text-blue-600"
+                    style={{ color: "#5A6A7A" }}
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="px-5 py-2.5 rounded text-sm font-medium text-white transition-all duration-200 hover:opacity-90 hover:-translate-y-px"
+                    style={{ backgroundColor: "#0A2540" }}
+                  >
+                    Book Consultation
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile menu button */}
@@ -268,21 +347,54 @@ export function Layout() {
                   )
                 )}
                 <div className="mt-3 pt-3 border-t border-gray-100 flex flex-col gap-2">
-                  <a
-                    href="tel:+14165550123"
-                    className="text-sm flex items-center gap-2 px-3 py-2"
-                    style={{ color: "#5A6A7A" }}
-                  >
-                    <Phone size={14} />
-                    (416) 555-0123
-                  </a>
-                  <Link
-                    to="/contact"
-                    className="px-4 py-2.5 rounded text-sm font-medium text-white text-center"
-                    style={{ backgroundColor: "#0A2540" }}
-                  >
-                    Book Consultation
-                  </Link>
+                  {user ? (
+                    <>
+                      <div className="flex items-center gap-2.5 px-3 py-2 rounded-md bg-gray-50">
+                        <div
+                          className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
+                          style={{ backgroundColor: "#2D9CDB" }}
+                        >
+                          {user.fullName.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-800">{user.fullName}</p>
+                          <p className="text-xs text-gray-400">{user.email}</p>
+                        </div>
+                      </div>
+                      <Link
+                        to="/dashboard"
+                        className="flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium transition-colors"
+                        style={{ color: "#0A2540" }}
+                      >
+                        <LayoutDashboard size={14} />
+                        My Dashboard
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium text-red-500 text-left"
+                      >
+                        <LogOut size={14} />
+                        Sign Out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        to="/login"
+                        className="px-4 py-2.5 rounded text-sm font-medium text-center border border-gray-200 transition-colors"
+                        style={{ color: "#0A2540" }}
+                      >
+                        Sign In
+                      </Link>
+                      <Link
+                        to="/contact"
+                        className="px-4 py-2.5 rounded text-sm font-medium text-white text-center"
+                        style={{ backgroundColor: "#0A2540" }}
+                      >
+                        Book Consultation
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -333,10 +445,10 @@ export function Layout() {
                 Serving individuals, investors, and businesses across Ontario with practical, results-driven legal representation.
               </p>
               <div className="flex gap-3">
-                <a href="#" className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                <a href={SOCIAL_linkedin} className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
                   <Linkedin size={14} />
                 </a>
-                <a href="#" className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                <a href={SOCIAL_facebook} className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
                   <Facebook size={14} />
                 </a>
               </div>
@@ -344,21 +456,15 @@ export function Layout() {
 
             {/* Services */}
             <div>
-              <h4
-                className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40"
-              >
+              <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
                 Services
               </h4>
               <ul className="space-y-2.5">
                 {[
-                  { label: "Real Estate Law", href: "#" },
-                  { label: "Business & Corporate Law", href: "#" },
-                  { label: "Civil Litigation", href: "#" },
-                  { label: "Wills & Estates", href: "#" },
-                  // { label: "Real Estate Law", href: "/real-estate" },
-                  // { label: "Business & Corporate Law", href: "/business-law" },
-                  // { label: "Civil Litigation", href: "/civil-litigation" },
-                  // { label: "Wills & Estates", href: "/wills-estates" },
+                  { label: "Real Estate Law", href: "/real-estate" },
+                  { label: "Business & Corporate Law", href: "/business-law" },
+                  { label: "Civil Litigation", href: "/civil-litigation" },
+                  { label: "Wills & Estates", href: "/wills-estates" },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link
@@ -397,20 +503,20 @@ export function Layout() {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="tel:+14165550123"
+                    href={PHONE_href}
                     className="flex items-start gap-2.5 text-sm text-white/60 hover:text-white transition-colors"
                   >
                     <Phone size={14} className="mt-0.5 flex-shrink-0" />
-                    (416) 555-0123
+                    {PHONE}
                   </a>
                 </li>
                 <li>
                   <a
-                    href="mailto:info@ellahilaw.ca"
+                    href={EMAIL_href}
                     className="flex items-start gap-2.5 text-sm text-white/60 hover:text-white transition-colors"
                   >
                     <Mail size={14} className="mt-0.5 flex-shrink-0" />
-                    info@ellahilaw.ca
+                    {EMAIL}
                   </a>
                 </li>
                 <li>
@@ -432,8 +538,12 @@ export function Layout() {
 
           {/* Bottom bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-            <p>© {new Date().getFullYear()} Ellahi Law Professional Corporation. All rights reserved.</p>
-            <p>Toronto, Ontario, Canada</p>
+            <p>© {new Date().getFullYear()} {TITLE}. All rights reserved.</p>
+            <div className="flex items-center gap-4">
+              <Link to="/blog" className="hover:text-white/70 transition-colors">Blog</Link>
+              <Link to="/login" className="hover:text-white/70 transition-colors">Sign In</Link>
+              <p>Toronto, Ontario, Canada</p>
+            </div>
           </div>
         </div>
       </footer>

@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
+import { ADDRESS, ADDRESS_href, EMAIL, EMAIL_href, PHONE, PHONE_href, TITLE } from "../../config/config";
 
 // ─── Images ───────────────────────────────────────────────────────────────────
 const HERO_IMG =
@@ -775,7 +776,7 @@ export function Home() {
                 Book a Consultation
               </Link>
               <a
-                href="tel:+14165550123"
+                href={PHONE_href}
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md text-sm font-medium text-white border-2 border-white/40 transition-all duration-200 hover:border-white hover:bg-white/10"
               >
                 <Phone size={15} />
@@ -907,7 +908,7 @@ export function Home() {
                 Practical, Results-Driven Legal Representation
               </h2>
               <p className="text-base leading-relaxed mb-5" style={{ color: "#5A6A7A" }}>
-                Ellahi Law Professional Corporation provides efficient and results-focused legal services to individuals, investors, and businesses across Ontario. With over <strong style={{ color: NAVY }}>9 years of experience</strong>, the firm has successfully handled hundreds of real estate transactions and legal matters.
+                {TITLE} provides efficient and results-focused legal services to individuals, investors, and businesses across Ontario. With over <strong style={{ color: NAVY }}>9 years of experience</strong>, the firm has successfully handled hundreds of real estate transactions and legal matters.
               </p>
               <p className="text-base leading-relaxed mb-7" style={{ color: "#5A6A7A" }}>
                 We understand that legal matters often involve significant financial and personal decisions. Our goal is to guide clients through these matters with clarity, transparency, and confidence.
@@ -1167,11 +1168,11 @@ export function Home() {
                 Book Your Consultation Today
               </Link>
               <a
-                href="tel:+14165550123"
+                href={PHONE_href}
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-md text-sm font-medium text-white border border-white/30 transition-all hover:bg-white/10"
               >
                 <Phone size={15} />
-                (416) 555-0123
+                {PHONE}
               </a>
             </div>
           </AnimatedSection>
@@ -1215,9 +1216,9 @@ export function Home() {
                 </h3>
                 <div className="space-y-5">
                   {[
-                    { icon: Phone, label: "Phone", value: "(416) 555-0123", href: "tel:+14165550123" },
-                    { icon: Mail, label: "Email", value: "info@ellahilaw.ca", href: "mailto:info@ellahilaw.ca" },
-                    { icon: MapPin, label: "Office", value: "123 Bay Street, Suite 400\nToronto, ON M5H 2S1", href: "#" },
+                    { icon: Phone, label: "Phone", value: `${PHONE}`, href: `${PHONE_href}` },
+                    { icon: Mail, label: "Email", value: `${EMAIL}`, href: `${EMAIL_href}` },
+                    { icon: MapPin, label: "Office", value: `${ADDRESS}`, href: `${ADDRESS_href}` },
                   ].map(({ icon: Icon, label, value, href }) => (
                     <a
                       key={label}

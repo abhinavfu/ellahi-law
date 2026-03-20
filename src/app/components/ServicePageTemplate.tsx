@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { motion } from "motion/react";
 import { CheckCircle, ArrowRight, Phone } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
+import { PHONE, PHONE_href } from "../../config/config";
 
 const NAVY = "#0A2540";
 const BLUE = "#2D9CDB";
@@ -92,11 +93,11 @@ export function ServicePageTemplate({
                 Book a Consultation
               </Link>
               <a
-                href="tel:+14165550123"
+                href={PHONE_href}
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md text-sm font-medium text-white border border-white/30 transition-all hover:bg-white/10"
               >
                 <Phone size={14} />
-                (416) 555-0123
+                {PHONE}
               </a>
             </div>
           </motion.div>
@@ -278,11 +279,11 @@ export function ServicePageTemplate({
                 Book a Consultation <ArrowRight size={15} />
               </Link>
               <a
-                href="tel:+14165550123"
+                href={PHONE_href}
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-md text-sm font-medium text-white border border-white/30 transition-all hover:bg-white/10"
               >
                 <Phone size={14} />
-                (416) 555-0123
+                {PHONE}
               </a>
             </div>
           </AnimatedSection>

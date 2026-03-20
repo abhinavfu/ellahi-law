@@ -2,13 +2,12 @@ import { Link } from "react-router";
 import { motion } from "motion/react";
 import { CheckCircle, ArrowRight, Star, Award, Users, Clock } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
+import { TITLE } from "../../config/config";
 
 const NAVY = "#0A2540";
 const BLUE = "#2D9CDB";
 const LIGHT_BG = "#F5F7FA";
 
-// const LAWYER_IMG =
-//   "https://images.unsplash.com/photo-1736939678218-bd648b5ef3bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBsYXd5ZXIlMjBhdHRvcm5leSUyMG9mZmljZSUyMHBvcnRyYWl0fGVufDF8fHx8MTc3MzQ5MDc0N3ww&ixlib=rb-4.1.0&q=80&w=1080";
 const LAWYER_IMG = "/images/profile.jpg";
 
 const LAW_OFFICE_IMG =
@@ -124,7 +123,7 @@ export function About() {
                 Committed to Excellence in Ontario Law
               </h2>
               <p className="text-base leading-relaxed mb-4" style={{ color: "#5A6A7A" }}>
-                Ellahi Law Professional Corporation is a Toronto-based law firm providing comprehensive legal services in real estate law, corporate law, civil litigation, and estate planning.
+                {TITLE} is a Toronto-based law firm providing comprehensive legal services in real estate law, corporate law, civil litigation, and estate planning.
               </p>
               <p className="text-base leading-relaxed mb-4" style={{ color: "#5A6A7A" }}>
                 Our firm is dedicated to delivering efficient, practical, and results-focused legal representation for individuals, investors, and businesses across Ontario.

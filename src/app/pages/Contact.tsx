@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Phone, Mail, MapPin, Clock, CheckCircle, Send, User } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
+import { ADDRESS, ADDRESS_href, EMAIL, EMAIL_href, PHONE, PHONE_href } from "../../config/config";
 
 const NAVY = "#0A2540";
 const BLUE = "#2D9CDB";
@@ -242,20 +243,20 @@ export function Contact() {
                       {
                         icon: Phone,
                         label: "Phone",
-                        value: "(416) 555-0123",
-                        href: "tel:+14165550123",
+                        value: `${PHONE}`,
+                        href: `${PHONE_href}`,
                       },
                       {
                         icon: Mail,
                         label: "Email",
-                        value: "info@ellahilaw.ca",
-                        href: "mailto:info@ellahilaw.ca",
+                        value: `${EMAIL}`,
+                        href: `${EMAIL_href}`,
                       },
                       {
                         icon: MapPin,
                         label: "Office Address",
-                        value: "123 Bay Street, Suite 400\nToronto, ON M5H 2S1",
-                        href: "#",
+                        value: `${ADDRESS}`,
+                        href: `${ADDRESS_href}`,
                       },
                     ].map(({ icon: Icon, label, value, href }) => (
                       <a
@@ -381,14 +382,10 @@ export function Contact() {
           </AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: "Real Estate Law", href: "#", emoji: "🏠" },
-              { label: "Business & Corporate Law", href: "#", emoji: "💼" },
-              { label: "Civil Litigation", href: "#", emoji: "⚖️" },
-              { label: "Wills & Estates", href: "#", emoji: "📝" },
-              // { label: "Real Estate Law", href: "/real-estate", emoji: "🏠" },
-              // { label: "Business & Corporate Law", href: "/business-law", emoji: "💼" },
-              // { label: "Civil Litigation", href: "/civil-litigation", emoji: "⚖️" },
-              // { label: "Wills & Estates", href: "/wills-estates", emoji: "📝" },
+              { label: "Real Estate Law", href: "/real-estate", emoji: "🏠" },
+              { label: "Business & Corporate Law", href: "/business-law", emoji: "💼" },
+              { label: "Civil Litigation", href: "/civil-litigation", emoji: "⚖️" },
+              { label: "Wills & Estates", href: "/wills-estates", emoji: "📝" },
             ].map((service, i) => (
               <motion.a
                 key={service.label}
