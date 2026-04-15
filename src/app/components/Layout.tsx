@@ -496,37 +496,39 @@ export function Layout() {
 
             {/* Other Services */}
             <div>
-              <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
-                Other Services
-              </h4>
-              <div className="grid grid-cols-1 gap-y-2 text-sm text-white/60">
-                {SERVICE_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    className="block hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+              <div className="mb-12">
+                <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
+                  Other Services
+                </h4>
+                <div className="grid grid-cols-1 gap-y-2 text-sm text-white/60">
+                  {SERVICE_LINKS.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      className="block hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Areas */}
-            <div>
-              <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
-                Areas Served
-              </h4>
-              <ul className="space-y-2.5">
-                {[
-                  "Toronto", "Scarborough", "North York", "Markham",
-                  "Mississauga", "Brampton", "Richmond Hill",
-                ].map((city) => (
-                  <li key={city} className="text-sm text-white/60">
-                    {city}
-                  </li>
-                ))}
-              </ul>
+              {/* Areas */}
+              <div>
+                <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
+                  Areas Served
+                </h4>
+                <ul className="space-y-2.5">
+                  {[
+                    "Toronto", "Scarborough", "North York", "Markham",
+                    "Richmond Hill",
+                  ].map((city) => (
+                    <li key={city} className="text-sm text-white/60">
+                      {city}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             {/* Contact */}
