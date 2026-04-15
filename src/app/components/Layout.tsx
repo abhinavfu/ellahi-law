@@ -76,6 +76,10 @@ export function Layout() {
     setUserMenuOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   // Close user menu on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
