@@ -1,80 +1,102 @@
 import { ServicePageTemplate } from "../components/ServicePageTemplate";
+import { FileText, ScrollText, Users, Shield } from "lucide-react";
+import { Contact } from "./Contact";
+import { ContactMessageCard } from "../components/ContactMessageCard";
 
 const HERO_IMG =
   "https://images.unsplash.com/photo-1736939678218-bd648b5ef3bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBsYXd5ZXIlMjBhdHRvcm5leSUyMG9mZmljZSUyMHBvcnRyYWl0fGVufDF8fHx8MTc3MzQ5MDc0N3ww&ixlib=rb-4.1.0&q=80&w=1080";
 
+const services = [
+  {
+    icon: FileText,
+    title: "Wills – Planning for the Future",
+    content: `A properly drafted will ensures your assets are distributed according to your wishes and can help avoid unnecessary disputes or complications for your family. Without a will, your estate will be distributed according to Ontario's Succession Law Reform Act, which may not reflect your intentions.
+
+We assist clients with:
+
+• Drafting wills 
+• Updating existing wills 
+• Advising on executor appointments 
+• Planning for distribution of assets 
+• Basic estate planning considerations 
+• Coordinating with real estate holdings where applicable 
+
+Our goal is to provide clear and practical estate planning so your wishes are properly documented.`
+  },
+  {
+    icon: ScrollText,
+    title: "Probate Applications (Certificates of Appointment of Estate Trustee)",
+    content: `In many cases, an executor must obtain probate (a Certificate of Appointment of Estate Trustee) before they can deal with estate assets such as bank accounts or real estate. The probate process involves preparing court applications, financial disclosures, and supporting documentation.
+
+We assist executors with:
+
+• Preparing probate applications 
+• Advising executors on their duties and responsibilities 
+• Preparing required court forms and affidavits 
+• Advising on estate administration tax (probate tax) 
+• Assisting with estate real estate transfers 
+• Guidance on next steps after probate is granted 
+
+We understand that estate administration can be unfamiliar and stressful for executors, and we aim to make the process clear and manageable.`
+  },
+  {
+    icon: Users,
+    title: "Practical Guidance for Executors and Families",
+    content: `Executors have important legal responsibilities and may face personal liability if estates are not handled properly. We provide guidance to help executors understand their obligations and properly administer estates.
+
+Because our firm also has experience in real estate matters, we are able to assist where estates involve property transfers or survivorship title issues.`
+  },
+  {
+    icon: Shield,
+    title: "Trusted Legal Guidance for Executors",
+    content: `Our approach is focused on practical solutions, careful legal review, and responsive service. Whether you need assistance obtaining probate, transferring estate property, or selling real estate as part of estate administration, we can assist you through each step of the process.`
+  }
+];
+
 export function WillsEstates() {
   return (
-    <ServicePageTemplate
-      badge="Wills & Estates"
-      title="Wills & Estate Planning Lawyer Toronto"
-      subtitle="Estate planning ensures that your wishes are respected and your loved ones are protected. We provide guidance on creating legally sound estate plans tailored to your circumstances."
-      heroImage={HERO_IMG}
-      intro="Planning your estate is one of the most important steps you can take to protect your family and assets. Ellahi Law provides comprehensive wills and estate planning services to individuals and families across Toronto and the GTA, ensuring your legacy is protected according to your wishes."
-      services={[
-        {
-          title: "Will Drafting",
-          desc: "Legally sound, clearly written wills that accurately reflect your wishes and minimize the risk of future disputes.",
-        },
-        {
-          title: "Estate Planning",
-          desc: "Comprehensive planning to protect your assets, minimize taxes, and ensure a smooth transition for your beneficiaries.",
-        },
-        {
-          title: "Power of Attorney",
-          desc: "Drafting continuing powers of attorney for property and personal care so trusted individuals can act on your behalf if needed.",
-        },
-        {
-          title: "Probate Applications",
-          desc: "Assistance with applying for a Certificate of Appointment of Estate Trustee (probate) in the Ontario courts.",
-        },
-        {
-          title: "Estate Administration Guidance",
-          desc: "Practical guidance for executors navigating the responsibilities of administering an estate, including tax filings and asset distribution.",
-        },
-        {
-          title: "Beneficiary Designations",
-          desc: "Advice on coordinating beneficiary designations on life insurance and RRSPs/RRIFs with your overall estate plan.",
-        },
-      ]}
-      whyUs={[
-        {
-          title: "Personalized Estate Plans",
-          desc: "We take the time to understand your family situation and craft a plan that reflects your specific wishes.",
-        },
-        {
-          title: "Clear, Plain-Language Documents",
-          desc: "Your estate documents will be written clearly so there's no ambiguity about your intentions.",
-        },
-        {
-          title: "Proactive Planning",
-          desc: "We help you anticipate issues before they arise so your estate administration runs smoothly.",
-        },
-        {
-          title: "Compassionate Guidance",
-          desc: "We approach estate planning with sensitivity, understanding the personal nature of these decisions.",
-        },
-      ]}
-      faqs={[
-        {
-          q: "Do I need a will if I'm young and healthy?",
-          a: "Yes. A will ensures your assets go to the people you choose and designates guardians for your children if needed. Without a will, Ontario's intestacy laws determine who inherits.",
-        },
-        {
-          q: "What is a power of attorney and why do I need one?",
-          a: "A power of attorney authorizes a trusted person to make decisions on your behalf if you become incapacitated. Without one, your family may need to apply to court to manage your affairs.",
-        },
-        {
-          q: "How much does it cost to make a will in Ontario?",
-          a: "Wills can range from a few hundred to over a thousand dollars depending on complexity. Contact us to discuss your situation and receive a clear, upfront quote.",
-        },
-        {
-          q: "What happens to my estate if I die without a will in Ontario?",
-          a: "If you die intestate (without a will), Ontario's Succession Law Reform Act governs distribution. Your assets may not go to the people you intended, and there will be no guardian designation for minor children.",
-        },
-      ]}
-      ctaText="Start Your Estate Planning Today"
-      ctaHref="/contact"
-    />
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <div className="relative h-96 bg-cover bg-center" style={{ backgroundImage: `url(${HERO_IMG})` }}>
+        <div className="absolute inset-0 bg-black-70 bg-opacity-50 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h1 className="text-4xl font-bold mb-4">Wills and Probate (Estate Administration Applications)</h1>
+            <p className="text-xl">Planning for the future and ensuring your estate is properly administered after death requires careful legal preparation.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {/* Intro */}
+        <div className="mb-12">
+          <p className="text-lg text-gray-700 leading-relaxed">
+            Planning for the future and ensuring your estate is properly administered after death requires careful legal preparation. At Ellahi Law Professional Corporation, we assist clients with wills and estate administration matters, including probate applications, to help ensure assets are properly transferred and legal requirements are met.
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed mt-4">
+            With legal experience handling estate-related matters and probate applications, our firm provides practical guidance to executors and families navigating the estate administration process.
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 gap-8">
+          {services.map((service, index) => (
+            <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div className="flex items-center mb-4">
+                <service.icon className="w-8 h-8 mr-3" style={{ color: "#2D9CDB" }} />
+                <h3 className="text-xl font-semibold text-gray-900">{service.title}</h3>
+              </div>
+              <div className="text-gray-700">
+                {service.content.split('\n\n').map((para, i) => (
+                  <p key={i} className="mb-4 whitespace-pre-line">{para}</p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <ContactMessageCard contactMessage={`Contact Ellahi Law Professional Corporation to discuss your estate matter and learn how we can assist with probate and real estate matters relating to estate administration.`} />
+      </div>
+    </div>
   );
 }

@@ -34,6 +34,7 @@ interface ServicePageTemplateProps {
   faqs?: FAQ[];
   ctaText: string;
   ctaHref: string;
+  contactMessage?: string;
 }
 
 export function ServicePageTemplate({
@@ -138,7 +139,7 @@ export function ServicePageTemplate({
             </h2>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 gap-5">
             {services.map((s, i) => (
               <motion.div
                 key={s.title}
@@ -161,9 +162,11 @@ export function ServicePageTemplate({
                 >
                   {s.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#5A6A7A" }}>
-                  {s.desc}
-                </p>
+                <div className="text-sm leading-relaxed" style={{ color: "#5A6A7A" }}>
+                  {s.desc.split('\n\n').map((para, i) => (
+                    <p key={i} className="mb-3 whitespace-pre-line">{para}</p>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>

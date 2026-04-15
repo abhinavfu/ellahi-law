@@ -19,19 +19,35 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "sonner";
 import { EMAIL, EMAIL_href, PHONE, PHONE_href, SOCIAL_facebook, SOCIAL_linkedin, TITLE } from "../../config/config";
 
+const REAL_ESTATE_LINKS = [
+  { label: "Real Estate Law", href: "/real-estate" },
+  { label: "Home Purchases & Sales", href: "/real-estate/home-purchases-and-sales" },
+  { label: "Condominium Purchases & Sales", href: "/real-estate/condominium-purchases-and-sales" },
+  { label: "Survivorship Applications", href: "/real-estate/survivorship-applications" },
+  { label: "Standard Refinance", href: "/real-estate/standard-refinance" },
+  { label: "Independent Legal Advice", href: "/real-estate/independent-legal-advice" },
+  { label: "Matrimonial Designations", href: "/real-estate/matrimonial-designations" },
+  { label: "Lease Agreements Drafting", href: "/real-estate/lease-agreements-drafting" },
+  { label: "Preconstruction Review", href: "/real-estate/preconstruction-review" },
+  { label: "Private Mortgage Lending", href: "/real-estate/private-mortgage-lending" },
+  { label: "Title Transfers", href: "/real-estate/title-transfers" },
+  { label: "Registration of Cautions", href: "/real-estate/registration-cautions" },
+  { label: "Registration of Liens", href: "/real-estate/registration-liens" },
+];
+
+const SERVICE_LINKS = [
+  { label: "Business & Corporate Law", href: "/business-law" },
+  { label: "Civil Litigation", href: "/civil-litigation" },
+  { label: "Wills & Estates", href: "/wills-estates" },
+  { label: "Criminal Defence", href: "/criminal-defence" },
+  { label: "Notary Services", href: "/notary" },
+];
+
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  {
-    label: "Services",
-    href: "#",
-    children: [
-      { label: "Real Estate Law", href: "/real-estate" },
-      { label: "Business & Corporate Law", href: "/business-law" },
-      { label: "Civil Litigation", href: "/civil-litigation" },
-      { label: "Wills & Estates", href: "/wills-estates" },
-    ],
-  },
+  { label: "Real Estate", href: "#", children: REAL_ESTATE_LINKS },
+  { label: "Services", href: "#", children: SERVICE_LINKS },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -39,8 +55,8 @@ const NAV_LINKS = [
 export function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileOpenLink, setMobileOpenLink] = useState<string | null>(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -55,7 +71,8 @@ export function Layout() {
 
   useEffect(() => {
     setMenuOpen(false);
-    setServicesOpen(false);
+    setOpenDropdown(null);
+    setMobileOpenLink(null);
     setUserMenuOpen(false);
   }, [location]);
 
@@ -124,27 +141,28 @@ export function Layout() {
                   <div
                     key={link.label}
                     className="relative"
-                    onMouseEnter={() => setServicesOpen(true)}
-                    onMouseLeave={() => setServicesOpen(false)}
+                    onMouseEnter={() => setOpenDropdown(link.label)}
+                    onMouseLeave={() => setOpenDropdown(null)}
                   >
                     <button
+                      onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
                       className="flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors rounded"
                       style={{ color: "#1A1A1A" }}
                     >
                       {link.label}
                       <ChevronDown
                         size={14}
-                        className={`transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
+                        className={`transition-transform duration-200 ${openDropdown === link.label ? "rotate-180" : ""}`}
                       />
                     </button>
                     <AnimatePresence>
-                      {servicesOpen && (
+                      {openDropdown === link.label && (
                         <motion.div
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 8 }}
                           transition={{ duration: 0.18 }}
-                          className="absolute top-full left-0 mt-1 w-56 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden"
+                          className="absolute top-full left-0 mt-1 w-60 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden"
                         >
                           {link.children.map((child) => (
                             <Link
@@ -300,18 +318,18 @@ export function Layout() {
                   link.children ? (
                     <div key={link.label}>
                       <button
-                        onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                        onClick={() => setMobileOpenLink(mobileOpenLink === link.label ? null : link.label)}
                         className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md"
                         style={{ color: "#1A1A1A" }}
                       >
                         {link.label}
                         <ChevronDown
                           size={14}
-                          className={`transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
+                          className={`transition-transform ${mobileOpenLink === link.label ? "rotate-180" : ""}`}
                         />
                       </button>
                       <AnimatePresence>
-                        {mobileServicesOpen && (
+                        {mobileOpenLink === link.label && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
@@ -454,28 +472,40 @@ export function Layout() {
               </div>
             </div>
 
-            {/* Services */}
+            {/* Real Estate Services */}
             <div>
               <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
-                Services
+                Real Estate Services
               </h4>
-              <ul className="space-y-2.5">
-                {[
-                  { label: "Real Estate Law", href: "/real-estate" },
-                  { label: "Business & Corporate Law", href: "/business-law" },
-                  { label: "Civil Litigation", href: "/civil-litigation" },
-                  { label: "Wills & Estates", href: "/wills-estates" },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      to={link.href}
-                      className="text-sm text-white/60 hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
+              <div className="grid grid-cols-1 gap-y-2 text-sm text-white/60">
+                {REAL_ESTATE_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="block hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 ))}
-              </ul>
+              </div>
+            </div>
+
+            {/* Other Services */}
+            <div>
+              <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
+                Other Services
+              </h4>
+              <div className="grid grid-cols-1 gap-y-2 text-sm text-white/60">
+                {SERVICE_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="block hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Areas */}

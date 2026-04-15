@@ -56,7 +56,7 @@ export function Blog() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center justify-center gap-2 mb-4">
-              <BookOpen size={20} className="text-blue-400" />
+              <BookOpen size={20} style={{ color: "#2D9CDB" }} />
               <span className="text-blue-300 text-sm font-medium tracking-wider uppercase">Legal Insights</span>
             </div>
             <h1

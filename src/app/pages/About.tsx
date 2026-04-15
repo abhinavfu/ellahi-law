@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
-import { CheckCircle, ArrowRight, Star, Award, Users, Clock } from "lucide-react";
+import { CheckCircle, ArrowRight, Star, Award, Users, Clock, Home, Building, Banknote, Scale, Heart, FileText, FileCheck, Shield, AlertTriangle, Lock, MessageCircle, Zap, Target } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { TITLE } from "../../config/config";
 
@@ -175,44 +175,107 @@ export function About() {
               {
                 title: "Clear Communication",
                 desc: "We explain your legal options in plain language so you can make informed decisions with confidence.",
-                icon: "💬",
+                icon: MessageCircle,
               },
               {
                 title: "Efficient Solutions",
                 desc: "We pursue the most direct path to your legal goals without unnecessary delays or complications.",
-                icon: "⚡",
+                icon: Zap,
               },
               {
                 title: "Practical Advice",
                 desc: "Our guidance is grounded in real-world outcomes, not just theoretical legal principles.",
-                icon: "🎯",
+                icon: Target,
               },
               {
                 title: "Strong Relationships",
                 desc: "We build lasting client relationships founded on trust, honesty, and consistent results.",
-                icon: "🤝",
+                icon: Users,
               },
-            ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="bg-white rounded-xl p-7 shadow-sm border border-gray-100"
-              >
-                <div className="text-3xl mb-4">{item.icon}</div>
-                <h3
-                  className="text-base font-semibold mb-2"
-                  style={{ fontFamily: '"Playfair Display", serif', color: NAVY }}
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="bg-white rounded-xl p-7 shadow-sm border border-gray-100"
                 >
-                  {item.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#5A6A7A" }}>
-                  {item.desc}
-                </p>
-              </motion.div>
+                  <div className="text-3xl mb-4">
+                    <Icon size={28} style={{ color: "#2D9CDB" }} />
+                  </div>
+                  <h3
+                    className="text-base font-semibold mb-2"
+                    style={{ fontFamily: '"Playfair Display", serif', color: NAVY }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#5A6A7A" }}>
+                    {item.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Real Estate Services */}
+      <section className="py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-12">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="h-px w-8" style={{ backgroundColor: BLUE }} />
+              <span className="text-sm tracking-widest uppercase" style={{ color: BLUE }}>
+                Real Estate Services
+              </span>
+              <div className="h-px w-8" style={{ backgroundColor: BLUE }} />
+            </div>
+            <h2
+              className="mb-4"
+              style={{
+                fontFamily: '"Playfair Display", serif',
+                color: NAVY,
+                fontSize: "clamp(1.7rem, 3vw, 2.3rem)",
+                fontWeight: 600,
+              }}
+            >
+              End-to-End Real Estate Legal Support
+            </h2>
+            <p className="max-w-2xl mx-auto" style={{ color: "#5A6A7A" }}>
+              From residential purchases to lien registrations, we provide practical real estate legal services tailored for Ontario buyers, sellers, lenders and investors.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: Home, title: "Home Purchases & Sales", href: "/real-estate/home-purchases-and-sales" },
+              { icon: Building, title: "Condominium Purchases & Sales", href: "/real-estate/condominium-purchases-and-sales" },
+              { icon: Users, title: "Survivorship Applications", href: "/real-estate/survivorship-applications" },
+              { icon: Banknote, title: "Standard Refinance", href: "/real-estate/standard-refinance" },
+              { icon: Scale, title: "Independent Legal Advice", href: "/real-estate/independent-legal-advice" },
+              { icon: Heart, title: "Matrimonial Designations", href: "/real-estate/matrimonial-designations" },
+              { icon: FileText, title: "Lease Agreements Drafting", href: "/real-estate/lease-agreements-drafting" },
+              { icon: FileCheck, title: "Preconstruction Review", href: "/real-estate/preconstruction-review" },
+              { icon: Shield, title: "Private Mortgage Lending", href: "/real-estate/private-mortgage-lending" },
+              { icon: ArrowRight, title: "Title Transfers", href: "/real-estate/title-transfers" },
+              { icon: AlertTriangle, title: "Registration of Cautions", href: "/real-estate/registration-cautions" },
+              { icon: Lock, title: "Registration of Liens", href: "/real-estate/registration-liens" },
+            ].map(({ icon: Icon, title, href }) => (
+              <Link
+                key={title}
+                to={href}
+                className="group block rounded-3xl border border-gray-100 p-6 transition-shadow hover:shadow-xl hover:border-blue-200"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-4">
+                  <Icon size={22} style={{ color: "#2D9CDB" }} />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
+                <p className="text-sm text-slate-600">Clear legal guidance for {title.toLowerCase()}.</p>
+              </Link>
             ))}
           </div>
         </div>

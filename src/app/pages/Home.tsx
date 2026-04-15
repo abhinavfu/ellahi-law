@@ -793,7 +793,7 @@ export function Home() {
               {["9+ Years Experience", "Hundreds of Transactions", "Responsive Service", "Toronto & GTA"].map(
                 (item) => (
                   <div key={item} className="flex items-center gap-1.5">
-                    <CheckCircle size={14} className="text-blue-300" />
+                    <CheckCircle size={14} style={{ color: "#2D9CDB" }} />
                     <span className="text-white/80 text-sm">{item}</span>
                   </div>
                 )

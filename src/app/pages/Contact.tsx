@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, Clock, CheckCircle, Send, User } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, CheckCircle, Send, User, Home, Briefcase, Gavel, FileText, Shield } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { ADDRESS, ADDRESS_href, EMAIL, EMAIL_href, PHONE, PHONE_href } from "../../config/config";
 
 const NAVY = "#0A2540";
 const BLUE = "#2D9CDB";
+const ICON_COLOR = BLUE;
 const LIGHT_BG = "#F5F7FA";
 
 function ContactForm() {
@@ -38,7 +39,7 @@ function ContactForm() {
           className="w-16 h-16 rounded-full flex items-center justify-center mb-5"
           style={{ backgroundColor: "#EBF5FC" }}
         >
-          <CheckCircle size={30} style={{ color: BLUE }} />
+          <CheckCircle size={30} style={{ color: ICON_COLOR }} />
         </motion.div>
         <h3
           className="text-2xl font-semibold mb-3"
@@ -68,7 +69,7 @@ function ContactForm() {
             Full Name *
           </label>
           <div className="relative">
-            <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: "#9CA3AF" }} />
+            <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: ICON_COLOR }} />
             <input
               required
               type="text"
@@ -85,7 +86,7 @@ function ContactForm() {
             Email Address *
           </label>
           <div className="relative">
-            <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: "#9CA3AF" }} />
+            <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: ICON_COLOR }} />
             <input
               required
               type="email"
@@ -104,7 +105,7 @@ function ContactForm() {
             Phone Number
           </label>
           <div className="relative">
-            <Phone size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: "#9CA3AF" }} />
+            <Phone size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: ICON_COLOR }} />
             <input
               type="tel"
               placeholder="(416) 000-0000"
@@ -170,7 +171,7 @@ function ContactForm() {
         className="w-full py-3.5 rounded-lg text-sm font-medium text-white flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
         style={{ backgroundColor: NAVY }}
       >
-        <Send size={14} />
+        <Send size={14} style={{ color: ICON_COLOR }} />
         Request Consultation
       </motion.button>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
@@ -180,7 +181,7 @@ function ContactForm() {
           "Serving Toronto & GTA",
         ].map((t) => (
           <div key={t} className="flex items-center gap-1.5 text-xs" style={{ color: "#5A6A7A" }}>
-            <CheckCircle size={12} style={{ color: BLUE }} />
+            <CheckCircle size={12} style={{ color: ICON_COLOR }} />
             {t}
           </div>
         ))}
@@ -268,7 +269,7 @@ export function Contact() {
                           className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors"
                           style={{ backgroundColor: "#EBF5FC" }}
                         >
-                          <Icon size={16} style={{ color: BLUE }} />
+                          <Icon size={16} style={{ color: ICON_COLOR }} />
                         </div>
                         <div>
                           <div className="text-xs font-medium mb-0.5" style={{ color: "#5A6A7A" }}>
@@ -293,7 +294,7 @@ export function Contact() {
                       className="w-10 h-10 rounded-lg flex items-center justify-center"
                       style={{ backgroundColor: "#EBF5FC" }}
                     >
-                      <Clock size={16} style={{ color: BLUE }} />
+                      <Clock size={16} style={{ color: ICON_COLOR }} />
                     </div>
                     <h3
                       className="text-lg font-semibold"
@@ -322,7 +323,7 @@ export function Contact() {
                     className="h-48 flex flex-col items-center justify-center border-b border-gray-100"
                     style={{ backgroundColor: LIGHT_BG }}
                   >
-                    <MapPin size={28} className="mb-2" style={{ color: BLUE }} />
+                    <MapPin size={28} className="mb-2" style={{ color: ICON_COLOR }} />
                     <p className="text-sm font-medium" style={{ color: NAVY }}>Bay Street, Toronto, ON</p>
                     <p className="text-xs mt-1" style={{ color: "#5A6A7A" }}>Financial District</p>
                   </div>
@@ -334,7 +335,7 @@ export function Contact() {
                       className="text-sm flex items-center justify-center gap-1.5 transition-colors"
                       style={{ color: BLUE }}
                     >
-                      <MapPin size={13} />
+                      <MapPin size={13} style={{ color: ICON_COLOR }} />
                       Get Directions
                     </a>
                   </div>
@@ -382,31 +383,38 @@ export function Contact() {
           </AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: "Real Estate Law", href: "/real-estate", emoji: "🏠" },
-              { label: "Business & Corporate Law", href: "/business-law", emoji: "💼" },
-              { label: "Civil Litigation", href: "/civil-litigation", emoji: "⚖️" },
-              { label: "Wills & Estates", href: "/wills-estates", emoji: "📝" },
-            ].map((service, i) => (
-              <motion.a
-                key={service.label}
-                href={service.href}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                whileHover={{ y: -3, transition: { duration: 0.18 } }}
-                className="flex flex-col items-center text-center p-6 rounded-xl border border-gray-100 transition-colors hover:border-blue-200"
-                style={{ backgroundColor: LIGHT_BG }}
-              >
-                <div className="text-3xl mb-3">{service.emoji}</div>
-                <div
-                  className="text-sm font-medium"
-                  style={{ color: NAVY }}
+              { label: "Real Estate Law", href: "/real-estate", icon: Home },
+              { label: "Business & Corporate Law", href: "/business-law", icon: Briefcase },
+              { label: "Civil Litigation", href: "/civil-litigation", icon: Gavel },
+              { label: "Wills & Estates", href: "/wills-estates", icon: FileText },
+              { label: "Criminal Law", href: "/criminal-law", icon: Shield },
+              { label: "Notary Services", href: "/notary", icon: CheckCircle },
+            ].map((service, i) => {
+              const Icon = service.icon;
+              return (
+                <motion.a
+                  key={service.label}
+                  href={service.href}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  whileHover={{ y: -3, transition: { duration: 0.18 } }}
+                  className="flex flex-col items-center text-center p-6 rounded-xl border border-gray-100 transition-colors hover:border-blue-200"
+                  style={{ backgroundColor: LIGHT_BG }}
                 >
-                  {service.label}
-                </div>
-              </motion.a>
-            ))}
+                  <div className="mb-3">
+                    <Icon size={28} style={{ color: ICON_COLOR }} />
+                  </div>
+                  <div
+                    className="text-sm font-medium"
+                    style={{ color: NAVY }}
+                  >
+                    {service.label}
+                  </div>
+                </motion.a>
+              );
+            })}
           </div>
         </div>
       </section>
