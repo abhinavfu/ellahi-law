@@ -25,6 +25,7 @@ interface PostForm {
   excerpt: string;
   content: string;
   featuredImage: string;
+  featuredImageFile: File | null;
   category: string;
   tagsInput: string;
   metaDescription: string;
@@ -35,6 +36,7 @@ const EMPTY_FORM: PostForm = {
   excerpt: "",
   content: "",
   featuredImage: "",
+  featuredImageFile: null,
   category: "General",
   tagsInput: "",
   metaDescription: "",
@@ -148,18 +150,25 @@ function PostEditor({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Featured Image URL</label>
-            <input
-              type="url"
-              value={form.featuredImage}
-              onChange={(e) => setForm({ ...form, featuredImage: e.target.value })}
-              placeholder="https://images.unsplash.com/..."
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all"
-            />
-            {form.featuredImage && (
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Featured Image</label>
+            <div className="space-y-3">
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Upload Image</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0] || null;
+                    setForm({ ...form, featuredImageFile: file, featuredImage: file ? "" : form.featuredImage });
+                  }}
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all file:mr-4 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100"
+                />
+              </div>
+            </div>
+            {(form.featuredImage || form.featuredImageFile) && (
               <div className="mt-2 rounded-lg overflow-hidden h-28 bg-gray-100">
                 <img
-                  src={form.featuredImage}
+                  src={form.featuredImageFile ? URL.createObjectURL(form.featuredImageFile) : form.featuredImage}
                   alt="Preview"
                   className="w-full h-full object-cover"
                   onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
@@ -267,7 +276,7 @@ export function Dashboard() {
   const [postLoading, setPostLoading] = useState(false);
 
   // Profile form
-  const [profileForm, setProfileForm] = useState({ fullName: user?.fullName || "", email: user?.email || "" });
+  const [profileForm, setProfileForm] = useState({ fullName: `${user?.username}`.replace("_", " ").toUpperCase() || "", email: user?.email || "" });
   const [profileLoading, setProfileLoading] = useState(false);
   const [profileSuccess, setProfileSuccess] = useState(false);
   const [profileError, setProfileError] = useState("");
@@ -278,7 +287,7 @@ export function Dashboard() {
   const [passSuccess, setPassSuccess] = useState(false);
   const [passError, setPassError] = useState("");
 
-  const myPosts = user ? (user.role === "admin" ? posts : getPostsByAuthor(user.id)) : [];
+  const myPosts = user ? (user.role === "admin" ? posts : getPostsByAuthor(user.username)) : [];
 
   useEffect(() => {
     if (editId) {
@@ -304,11 +313,10 @@ export function Dashboard() {
           slug,
           excerpt: data.excerpt,
           content: data.content,
-          featuredImage: data.featuredImage || "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1080",
           category: data.category,
           tags,
-          metaDescription: data.metaDescription,
-        });
+          meta_description: data.metaDescription,
+        }, data.featuredImageFile || undefined);
         toast.success("Post updated successfully!");
         setEditingPost(null);
       } else {
@@ -317,13 +325,11 @@ export function Dashboard() {
           slug,
           excerpt: data.excerpt,
           content: data.content,
-          featuredImage: data.featuredImage || "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1080",
           category: data.category,
           tags,
-          author: user.fullName,
-          authorId: user.id,
-          metaDescription: data.metaDescription,
-        });
+          author: user.username,
+          meta_description: data.metaDescription,
+        }, data.featuredImageFile || undefined);
         toast.success("Post published successfully!");
         setActiveTab("posts");
       }
@@ -404,14 +410,14 @@ export function Dashboard() {
               className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-lg flex-shrink-0"
               style={{ backgroundColor: "#2D9CDB" }}
             >
-              {user.fullName.charAt(0).toUpperCase()}
+              {user.username.charAt(0).toUpperCase()}
             </div>
             <div>
               <h1
                 className="text-white"
                 style={{ fontFamily: '"Playfair Display", serif', fontSize: "1.4rem" }}
               >
-                {user.fullName}
+                {user.username}
               </h1>
               <p className="text-white/60 text-sm">
                 {user.role === "admin" ? "Administrator" : "Author"} · {user.email}
@@ -572,6 +578,7 @@ export function Dashboard() {
                           excerpt: editingPost.excerpt,
                           content: editingPost.content,
                           featuredImage: editingPost.featuredImage,
+                          featuredImageFile: null,
                           category: editingPost.category,
                           tagsInput: editingPost.tags.join(", "),
                           metaDescription: editingPost.metaDescription || "",
@@ -614,7 +621,7 @@ export function Dashboard() {
                       <div className="space-y-3">
                         {myPosts.map((post) => {
                           const cc = CATEGORY_COLORS[post.category] || CATEGORY_COLORS["General"];
-                          const canEdit = user.id === post.authorId || user.role === "admin";
+                          const canEdit = user.username === post.author || user.role === "admin";
                           return (
                             <motion.div
                               key={post.id}

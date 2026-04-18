@@ -1,176 +1,238 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import apiService from "../../services/api";
 
 export interface User {
   id: string;
-  fullName: string;
   email: string;
-  role: "admin" | "user";
+  name: string;
+  role: "user" | "admin" | "author";
+  avatar?: string;
+  bio?: string;
   createdAt: string;
-}
-
-interface StoredUser extends User {
-  passwordHash: string;
+  updatedAt?: string;
 }
 
 interface AuthContextType {
   user: User | null;
-  loading: boolean;
-  login: (email: string, password: string, remember?: boolean) => Promise<void>;
-  register: (fullName: string, email: string, password: string) => Promise<void>;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  error: string | null;
+  successMessage: string | null;
+  login: (email: string, password: string) => Promise<boolean>;
+  register: (email: string, password: string, name: string) => Promise<boolean>;
+  forgotPassword: (email: string) => Promise<boolean>;
+  resetPassword: (token: string, password: string) => Promise<boolean>;
+  changePassword: (oldPassword: string, newPassword: string) => Promise<boolean>;
+  updateProfile: (data: Partial<User>) => Promise<boolean>;
   logout: () => void;
-  updateProfile: (data: { fullName: string; email: string }) => Promise<void>;
-  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
-  sendResetEmail: (email: string) => Promise<boolean>;
+  clearError: () => void;
+  clearSuccess: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const USERS_KEY = "ellahi_users";
-const SESSION_KEY = "ellahi_session";
-
-// Simple deterministic hash (not secure - demo only)
-function hashPassword(password: string): string {
-  return btoa(encodeURIComponent(password + "_ellahi_salt_2026"));
-}
-
-function verifyPassword(password: string, hash: string): boolean {
-  return hashPassword(password) === hash;
-}
-
-function getStoredUsers(): StoredUser[] {
-  try {
-    const raw = localStorage.getItem(USERS_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveStoredUsers(users: StoredUser[]) {
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
-}
-
-// Seed admin user
-function initializeAdminUser() {
-  const users = getStoredUsers();
-  const adminExists = users.find((u) => u.id === "admin-seed");
-  if (!adminExists) {
-    const admin: StoredUser = {
-      id: "admin-seed",
-      fullName: "Ellahi Law Admin",
-      email: "admin@ellahilaw.ca",
-      passwordHash: hashPassword("Demo@2026"),
-      role: "admin",
-      createdAt: new Date("2026-01-01").toISOString(),
-    };
-    users.unshift(admin);
-    saveStoredUsers(users);
-  }
-}
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
+  // Load user from localStorage on mount
   useEffect(() => {
-    initializeAdminUser();
-    // Restore session
-    const session = localStorage.getItem(SESSION_KEY);
-    if (session) {
+    const storedUser = localStorage.getItem("user");
+    const token = localStorage.getItem("authToken");
+
+    if (storedUser && token) {
       try {
-        const parsed = JSON.parse(session);
-        const users = getStoredUsers();
-        const found = users.find((u) => u.id === parsed.id);
-        if (found) {
-          const { passwordHash: _, ...userWithoutPassword } = found;
-          setUser(userWithoutPassword);
-        }
+        setUser(JSON.parse(storedUser));
       } catch {
-        localStorage.removeItem(SESSION_KEY);
+        localStorage.removeItem("user");
+        localStorage.removeItem("authToken");
       }
     }
-    setLoading(false);
   }, []);
 
-  const login = async (email: string, password: string, remember = false) => {
-    const users = getStoredUsers();
-    const found = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
-    if (!found) throw new Error("No account found with that email address.");
-    if (!verifyPassword(password, found.passwordHash)) throw new Error("Incorrect password.");
-    const { passwordHash: _, ...userWithoutPassword } = found;
-    setUser(userWithoutPassword);
-    if (remember) {
-      localStorage.setItem(SESSION_KEY, JSON.stringify({ id: found.id }));
-    } else {
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ id: found.id }));
-      localStorage.setItem(SESSION_KEY, JSON.stringify({ id: found.id }));
+  const login = async (email: string, password: string): Promise<boolean> => {
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      const response = await apiService.login(email, password);
+
+      if (response.success && response.data) {
+        const { user: userData } = response.data as { user: User };
+        setUser(userData);
+        setSuccessMessage("Login successful!");
+        return true;
+      } else {
+        setError(response.error || "Login failed");
+        return false;
+      }
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Login failed";
+      setError(errorMsg);
+      return false;
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const register = async (fullName: string, email: string, password: string) => {
-    const users = getStoredUsers();
-    const exists = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
-    if (exists) throw new Error("An account with this email already exists.");
-    if (password.length < 8) throw new Error("Password must be at least 8 characters.");
-    const newUser: StoredUser = {
-      id: `user-${Date.now()}`,
-      fullName: fullName.trim(),
-      email: email.toLowerCase().trim(),
-      passwordHash: hashPassword(password),
-      role: "user",
-      createdAt: new Date().toISOString(),
-    };
-    users.push(newUser);
-    saveStoredUsers(users);
-    const { passwordHash: _, ...userWithoutPassword } = newUser;
-    setUser(userWithoutPassword);
-    localStorage.setItem(SESSION_KEY, JSON.stringify({ id: newUser.id }));
+  const register = async (email: string, password: string, name: string): Promise<boolean> => {
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      const response = await apiService.register(email, password, name);
+
+      if (response.success) {
+        setSuccessMessage("Registration successful! Please log in.");
+        return true;
+      } else {
+        setError(response.error || "Registration failed");
+        return false;
+      }
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Registration failed";
+      setError(errorMsg);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const forgotPassword = async (email: string): Promise<boolean> => {
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      const response = await apiService.forgotPassword(email);
+
+      if (response.success) {
+        setSuccessMessage("Password reset link sent to your email!");
+        return true;
+      } else {
+        setError(response.error || "Failed to send reset link");
+        return false;
+      }
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Request failed";
+      setError(errorMsg);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const resetPassword = async (token: string, password: string): Promise<boolean> => {
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      const response = await apiService.resetPassword(token, password);
+
+      if (response.success) {
+        setSuccessMessage("Password reset successful! Please log in.");
+        return true;
+      } else {
+        setError(response.error || "Password reset failed");
+        return false;
+      }
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Reset failed";
+      console.log(err)
+      setError(errorMsg);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const changePassword = async (oldPassword: string, newPassword: string): Promise<boolean> => {
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      const response = await apiService.changePassword(oldPassword, newPassword);
+
+      if (response.success) {
+        setSuccessMessage("Password changed successfully!");
+        return true;
+      } else {
+        setError(response.error || "Failed to change password");
+        return false;
+      }
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Failed to change password";
+      setError(errorMsg);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updateProfile = async (data: Partial<User>): Promise<boolean> => {
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      if (!user?.username) throw new Error("User not authenticated");
+
+      const response = await apiService.updateUserProfile(user.username, data);
+
+      if (response.success && response.data) {
+        const updatedUser = response.data as User;
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        setUser(updatedUser);
+        setSuccessMessage("Profile updated successfully!");
+        return true;
+      } else {
+        setError(response.error || "Failed to update profile");
+        return false;
+      }
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Failed to update profile";
+      setError(errorMsg);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const logout = () => {
+    apiService.logout();
     setUser(null);
-    localStorage.removeItem(SESSION_KEY);
-    sessionStorage.removeItem(SESSION_KEY);
+    setError(null);
+    setSuccessMessage(null);
   };
 
-  const updateProfile = async (data: { fullName: string; email: string }) => {
-    if (!user) throw new Error("Not authenticated.");
-    const users = getStoredUsers();
-    const emailConflict = users.find(
-      (u) => u.email.toLowerCase() === data.email.toLowerCase() && u.id !== user.id
-    );
-    if (emailConflict) throw new Error("That email is already in use by another account.");
-    const idx = users.findIndex((u) => u.id === user.id);
-    if (idx === -1) throw new Error("User not found.");
-    users[idx] = { ...users[idx], fullName: data.fullName.trim(), email: data.email.toLowerCase().trim() };
-    saveStoredUsers(users);
-    const updated: User = { ...user, fullName: data.fullName.trim(), email: data.email.toLowerCase().trim() };
-    setUser(updated);
-  };
-
-  const changePassword = async (currentPassword: string, newPassword: string) => {
-    if (!user) throw new Error("Not authenticated.");
-    const users = getStoredUsers();
-    const idx = users.findIndex((u) => u.id === user.id);
-    if (idx === -1) throw new Error("User not found.");
-    if (!verifyPassword(currentPassword, users[idx].passwordHash)) {
-      throw new Error("Current password is incorrect.");
-    }
-    if (newPassword.length < 8) throw new Error("New password must be at least 8 characters.");
-    users[idx].passwordHash = hashPassword(newPassword);
-    saveStoredUsers(users);
-  };
-
-  const sendResetEmail = async (email: string): Promise<boolean> => {
-    const users = getStoredUsers();
-    const found = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
-    // Always return true for security (don't reveal if email exists)
-    // In a real app, this would send an email
-    return !!found;
-  };
+  const clearError = () => setError(null);
+  const clearSuccess = () => setSuccessMessage(null);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, updateProfile, changePassword, sendResetEmail }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isLoading,
+        isAuthenticated: !!user,
+        error,
+        successMessage,
+        login,
+        register,
+        forgotPassword,
+        resetPassword,
+        changePassword,
+        updateProfile,
+        logout,
+        clearError,
+        clearSuccess,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

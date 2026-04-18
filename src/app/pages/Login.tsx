@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "sonner";
 
 export function Login() {
-  const { login, user } = useAuth();
+  const { login, user, error: authError, clearError } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
@@ -22,14 +22,18 @@ export function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    clearError(); // Clear any previous auth errors
     setError("");
     if (!form.email) { setError("Please enter your email address."); return; }
     if (!form.password) { setError("Please enter your password."); return; }
     setLoading(true);
     try {
-      await login(form.email, form.password, form.remember);
-      toast.success("Welcome back! You're now signed in.");
-      navigate(from, { replace: true });
+      const success = await login(form.email, form.password, form.remember);
+      if (success) {
+        toast.success("Welcome back! You're now signed in.");
+        navigate(from, { replace: true });
+      }
+      // Error is handled by AuthContext and displayed below
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Login failed.");
     } finally {
@@ -79,10 +83,10 @@ export function Login() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="px-8 py-6 space-y-5">
-            {error && (
+            { (error || authError) && (
               <div className="flex items-start gap-2.5 p-3 rounded-lg bg-red-50 border border-red-100 text-sm text-red-600">
                 <AlertCircle size={15} className="flex-shrink-0 mt-0.5" />
-                {error}
+                {error || authError}
               </div>
             )}
 

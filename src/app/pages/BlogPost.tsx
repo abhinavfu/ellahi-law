@@ -52,7 +52,7 @@ export function BlogPost() {
     day: "numeric",
   });
 
-  const canEdit = user && (user.id === post.authorId || user.role === "admin");
+  const canEdit = user && (user.username === post.author || user.role === "admin");
 
   const related = posts
     .filter((p) => p.id !== post.id && p.category === post.category)

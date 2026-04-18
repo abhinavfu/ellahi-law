@@ -42,7 +42,7 @@ function PasswordStrength({ password }: { password: string }) {
 }
 
 export function Register() {
-  const { register, user } = useAuth();
+  const { register, user, clearError } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({ fullName: "", email: "", password: "", confirm: "", terms: false });
@@ -67,14 +67,18 @@ export function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    clearError(); // Clear any previous auth errors
     setError("");
     const validationError = validate();
     if (validationError) { setError(validationError); return; }
     setLoading(true);
     try {
-      await register(form.fullName, form.email, form.password);
-      toast.success("Account created! Welcome to Ellahi Law.");
-      navigate("/dashboard", { replace: true });
+      const success = await register(form.fullName, form.email, form.password);
+      if (success) {
+        toast.success("Account created! Welcome to Ellahi Law.");
+        navigate("/dashboard", { replace: true });
+      }
+      
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Registration failed.");
     } finally {

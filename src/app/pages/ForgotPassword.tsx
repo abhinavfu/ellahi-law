@@ -5,7 +5,7 @@ import { Mail, ArrowLeft, AlertCircle, CheckCircle, Send } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
 export function ForgotPassword() {
-  const { sendResetEmail } = useAuth();
+  const { forgotPassword } = useAuth();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
   const [error, setError] = useState("");
@@ -17,7 +17,7 @@ export function ForgotPassword() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please enter a valid email address."); return; }
     setStatus("loading");
     try {
-      await sendResetEmail(email);
+      await forgotPassword(email);
       setStatus("sent");
     } catch {
       setStatus("error");

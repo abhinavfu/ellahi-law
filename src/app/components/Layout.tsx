@@ -225,10 +225,10 @@ export function Layout() {
                       className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
                       style={{ backgroundColor: "#2D9CDB" }}
                     >
-                      {user.fullName.charAt(0).toUpperCase()}
+                      {user.username.charAt(0).toUpperCase()}
                     </div>
                     <span className="text-sm font-medium max-w-[100px] truncate" style={{ color: "#0A2540" }}>
-                      {user.fullName.split(" ")[0]}
+                      {user.username.split(" ")[0]}
                     </span>
                     <ChevronDown
                       size={13}
@@ -245,7 +245,7 @@ export function Layout() {
                         className="absolute top-full right-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden"
                       >
                         <div className="px-4 py-3 border-b border-gray-100">
-                          <p className="text-sm font-medium text-gray-800 truncate">{user.fullName}</p>
+                          <p className="text-sm font-medium text-gray-800 truncate">{user.username}</p>
                           <p className="text-xs text-gray-400 truncate">{user.email}</p>
                         </div>
                         <Link
@@ -376,10 +376,10 @@ export function Layout() {
                           className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
                           style={{ backgroundColor: "#2D9CDB" }}
                         >
-                          {user.fullName.charAt(0).toUpperCase()}
+                          {user.username.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-800">{user.fullName}</p>
+                          <p className="text-sm font-medium text-gray-800">{user.username}</p>
                           <p className="text-xs text-gray-400">{user.email}</p>
                         </div>
                       </div>
