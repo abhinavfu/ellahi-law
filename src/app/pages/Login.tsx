@@ -73,14 +73,6 @@ export function Login() {
             <p className="text-sm text-gray-500 mt-1">Sign in to your account to continue</p>
           </div>
 
-          {/* Demo hint */}
-          <div className="mx-8 mt-5 p-3 rounded-lg flex gap-2.5 text-xs" style={{ backgroundColor: "#EBF5FC" }}>
-            <Info size={14} className="flex-shrink-0 mt-0.5" style={{ color: "#2D9CDB" }} />
-            <div style={{ color: "#1A6A9A" }}>
-              <strong>Demo Admin:</strong> admin@ellahilaw.ca / Demo@2026
-            </div>
-          </div>
-
           {/* Form */}
           <form onSubmit={handleSubmit} className="px-8 py-6 space-y-5">
             { (error || authError) && (

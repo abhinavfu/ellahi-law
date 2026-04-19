@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, Clock, CheckCircle, Send, User, Home, Briefcase, Gavel, FileText, Shield } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, CheckCircle, Send, User, Home, Briefcase, Gavel, FileText, Shield, Printer } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
-import { ADDRESS, ADDRESS_href, EMAIL, EMAIL_href, PHONE, PHONE_href } from "../../config/config";
+import { ADDRESS, ADDRESS_href, ADDRESS_EMBED_href, EMAIL, EMAIL_href, PHONE, PHONE_href, FAX, FAX_href} from "../../config/config";
 
 const NAVY = "#0A2540";
 const BLUE = "#2D9CDB";
@@ -254,6 +254,12 @@ export function Contact() {
                         href: `${EMAIL_href}`,
                       },
                       {
+                        icon: Printer,
+                        label: "Fax",
+                        value: `${FAX}`,
+                        href: `${FAX_href}`,
+                      },
+                      {
                         icon: MapPin,
                         label: "Office Address",
                         value: `${ADDRESS}`,
@@ -319,14 +325,19 @@ export function Contact() {
 
                 {/* Map placeholder */}
                 <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-                  <div
-                    className="h-48 flex flex-col items-center justify-center border-b border-gray-100"
-                    style={{ backgroundColor: LIGHT_BG }}
-                  >
-                    <MapPin size={28} className="mb-2" style={{ color: ICON_COLOR }} />
-                    <p className="text-sm font-medium" style={{ color: NAVY }}>Bay Street, Toronto, ON</p>
-                    <p className="text-xs mt-1" style={{ color: "#5A6A7A" }}>Financial District</p>
-                  </div>
+                  {ADDRESS_EMBED_href && (
+                    <div>
+                      <iframe
+                        src={ADDRESS_EMBED_href}
+                        width="100%"
+                        height="300"
+                        style={{ border: 0 }}
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        />
+                    </div>
+                  )}
                   <div className="p-4">
                     <a
                       href="https://maps.google.com"

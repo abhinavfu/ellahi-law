@@ -1,11 +1,12 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
-import { CheckCircle, ArrowRight, Star, Award, Users, Clock, Home, Building, Banknote, Scale, Heart, FileText, FileCheck, Shield, AlertTriangle, Lock, MessageCircle, Zap, Target } from "lucide-react";
+import { CheckCircle, ArrowRight, Star, Award, Users, Clock, Home, Building, Banknote, Scale, Heart, FileText, FileCheck, Shield, AlertTriangle, Lock, MessageCircle, Zap, Target, Mail } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
-import { TITLE } from "../../config/config";
+import { TITLE, EMAIL_SELF, EMAIL_href_SELF } from "../../config/config";
 
 const NAVY = "#0A2540";
 const BLUE = "#2D9CDB";
+const ICON_COLOR = BLUE;
 const LIGHT_BG = "#F5F7FA";
 
 const LAWYER_IMG = "/images/profile.jpg";
@@ -131,6 +132,19 @@ export function About() {
               <p className="text-base leading-relaxed mb-7" style={{ color: "#5A6A7A" }}>
                 We understand that legal matters often involve significant financial and personal decisions. Our goal is to guide clients through these matters with clarity, transparency, and confidence.
               </p>
+
+              {/* Personal email */}
+              <div>
+                <a
+                  href={EMAIL_href_SELF}
+                  className="inline-flex items-center gap-2 mb-6"
+                > 
+                  Contact
+                  <Mail size={20} style={{ color: ICON_COLOR }} />
+                  {EMAIL_SELF}
+                </a>
+              </div>
+
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md text-sm font-medium text-white transition-all hover:opacity-90"

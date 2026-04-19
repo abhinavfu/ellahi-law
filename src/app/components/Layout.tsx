@@ -13,11 +13,11 @@ import {
   LogOut,
   LayoutDashboard,
   BookOpen,
-  User,
+  Printer,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "sonner";
-import { EMAIL, EMAIL_href, PHONE, PHONE_href, SOCIAL_facebook, SOCIAL_linkedin, TITLE } from "../../config/config";
+import { ADDRESS, EMAIL, EMAIL_href, FAX, FAX_href, PHONE, PHONE_href, SOCIAL_facebook, SOCIAL_linkedin, TITLE } from "../../config/config";
 
 const REAL_ESTATE_LINKS = [
   { label: "Real Estate Law", href: "/real-estate" },
@@ -556,9 +556,18 @@ export function Layout() {
                   </a>
                 </li>
                 <li>
+                  <a
+                    href={FAX_href}
+                    className="flex items-start gap-2.5 text-sm text-white/60 hover:text-white transition-colors"
+                  >
+                    <Printer size={14} className="mt-0.5 flex-shrink-0" />
+                    {FAX}
+                  </a>
+                </li>
+                <li>
                   <div className="flex items-start gap-2.5 text-sm text-white/60">
                     <MapPin size={14} className="mt-0.5 flex-shrink-0" />
-                    <span>123 Bay Street, Suite 400<br />Toronto, ON M5H 2S1</span>
+                    <span>{ADDRESS}</span>
                   </div>
                 </li>
               </ul>

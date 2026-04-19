@@ -17,10 +17,11 @@ import {
   Send,
   User,
   Mail,
+  Printer,
 } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
-import { ADDRESS, ADDRESS_href, EMAIL, EMAIL_href, PHONE, PHONE_href, TITLE } from "../../config/config";
+import { ADDRESS, ADDRESS_href, ADDRESS_EMBED_href, EMAIL, EMAIL_href, PHONE, PHONE_href, TITLE, FAX, FAX_href } from "../../config/config";
 
 // ─── Images ───────────────────────────────────────────────────────────────────
 const HERO_IMG =
@@ -1214,10 +1215,11 @@ export function Home() {
                 >
                   Office Information
                 </h3>
-                <div className="space-y-5">
+                <div className="space-y-5 mb-6">
                   {[
                     { icon: Phone, label: "Phone", value: `${PHONE}`, href: `${PHONE_href}` },
                     { icon: Mail, label: "Email", value: `${EMAIL}`, href: `${EMAIL_href}` },
+                    { icon: Printer, label: "Fax", value: `${FAX}`, href: `${FAX_href}`},
                     { icon: MapPin, label: "Office", value: `${ADDRESS}`, href: `${ADDRESS_href}` },
                   ].map(({ icon: Icon, label, value, href }) => (
                     <a
@@ -1240,12 +1242,19 @@ export function Home() {
                 </div>
 
                 {/* Map placeholder */}
-                <div className="mt-6 rounded-xl overflow-hidden border border-gray-100 h-40 flex items-center justify-center" style={{ backgroundColor: LIGHT_BG }}>
-                  <div className="text-center">
-                    <MapPin size={24} className="mx-auto mb-2" style={{ color: BLUE }} />
-                    <p className="text-xs" style={{ color: "#5A6A7A" }}>Bay Street, Toronto, ON</p>
+                {ADDRESS_EMBED_href && (
+                  <div>
+                    <iframe
+                      src={ADDRESS_EMBED_href}
+                      width="100%"
+                      height="300"
+                      style={{ border: 0 }}
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                      />
                   </div>
-                </div>
+                )}
 
                 <div className="mt-6 pt-6 border-t border-gray-100">
                   <p className="text-xs font-medium mb-2" style={{ color: "#5A6A7A" }}>Office Hours</p>
