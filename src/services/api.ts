@@ -256,6 +256,15 @@ class ApiService {
       body: JSON.stringify({ old_password: oldPassword, new_password: newPassword }),
     });
   }
+
+  // ===== CONTACT ENDPOINT =====
+
+  async sendContactMessage(formData: any) {
+    return this.request("/contact/", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    }, false);
+  }
 }
 
 export default new ApiService();
