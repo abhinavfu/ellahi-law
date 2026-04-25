@@ -82,8 +82,14 @@ export function BlogProvider({ children }: { children: ReactNode }) {
     excerpt: apiPost.excerpt || "",
     content: apiPost.content || "",
     featuredImage: apiPost.image || "",
-    category: apiPost.category || "General",
-    tags: apiPost.tags || [],
+    category:
+      apiPost.category_detail?.name ||
+      apiPost.category ||
+      "General",
+    tags:
+      Array.isArray(apiPost.tags_detail)
+        ? apiPost.tags_detail.map((tag: any) => tag.name ?? tag)
+        : apiPost.tags || [],
     author: apiPost.author || "",
     authorId: apiPost.author_id?.toString() || apiPost.id?.toString() || "",
     date: apiPost.created_at || new Date().toISOString(),
