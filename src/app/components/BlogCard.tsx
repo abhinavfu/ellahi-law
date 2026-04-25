@@ -18,7 +18,8 @@ const CATEGORY_COLORS: Record<string, { bg: string; text: string }> = {
 };
 
 export function BlogCard({ post, featured = false, index = 0 }: BlogCardProps) {
-  const categoryColor = CATEGORY_COLORS[post.category] || CATEGORY_COLORS["General"];
+  const categoryLabel = typeof post.category === "string" ? post.category : post.category?.name || "General";
+  const categoryColor = CATEGORY_COLORS[categoryLabel] || CATEGORY_COLORS["General"];
   const formattedDate = new Date(post.date).toLocaleDateString("en-CA", {
     year: "numeric",
     month: "long",
@@ -46,7 +47,7 @@ export function BlogCard({ post, featured = false, index = 0 }: BlogCardProps) {
               className="text-xs font-semibold px-3 py-1 rounded-full"
               style={{ backgroundColor: categoryColor.bg, color: categoryColor.text }}
             >
-              {post.category}
+              {categoryLabel}
             </span>
             <span className="text-xs text-gray-400 font-medium uppercase tracking-wide">Featured</span>
           </div>
@@ -100,7 +101,7 @@ export function BlogCard({ post, featured = false, index = 0 }: BlogCardProps) {
             className="text-xs font-semibold px-2.5 py-1 rounded-full"
             style={{ backgroundColor: categoryColor.bg, color: categoryColor.text }}
           >
-            {post.category}
+            {categoryLabel}
           </span>
         </div>
         <h3
@@ -113,11 +114,14 @@ export function BlogCard({ post, featured = false, index = 0 }: BlogCardProps) {
         {post.tags && post.tags.length > 0 && (
           <div className="flex items-center gap-1.5 mb-4 flex-wrap">
             <Tag size={11} className="text-gray-300" />
-            {post.tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded">
-                {tag}
-              </span>
-            ))}
+            {post.tags.slice(0, 3).map((tag, index) => {
+              const tagLabel = typeof tag === "string" ? tag : tag?.name || tag?.slug || String(tag);
+              return (
+                <span key={`${tagLabel}-${index}`} className="text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded">
+                  {tagLabel}
+                </span>
+              );
+            })}
           </div>
         )}
         <div className="flex items-center justify-between pt-4 border-t border-gray-100">

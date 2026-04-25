@@ -24,7 +24,10 @@ export function Blog() {
         !search ||
         p.title.toLowerCase().includes(search.toLowerCase()) ||
         p.excerpt.toLowerCase().includes(search.toLowerCase()) ||
-        p.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()));
+        p.tags.some((t) => {
+          const tagLabel = typeof t === "string" ? t : t?.name || t?.slug || String(t);
+          return tagLabel.toLowerCase().includes(search.toLowerCase());
+        });
       return matchCat && matchSearch;
     });
   }, [posts, search, selectedCategory]);

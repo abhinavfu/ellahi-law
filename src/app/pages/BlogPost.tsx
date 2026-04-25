@@ -44,7 +44,8 @@ export function BlogPost() {
     );
   }
 
-  const categoryColor = CATEGORY_COLORS[post.category] || CATEGORY_COLORS["General"];
+  const categoryLabel = typeof post.category === "string" ? post.category : post.category?.name || "General";
+  const categoryColor = CATEGORY_COLORS[categoryLabel] || CATEGORY_COLORS["General"];
   const readTime = estimateReadTime(post.content);
   const formattedDate = new Date(post.date).toLocaleDateString("en-CA", {
     year: "numeric",
@@ -55,7 +56,7 @@ export function BlogPost() {
   const canEdit = user && (user.username === post.author || user.role === "admin");
 
   const related = posts
-    .filter((p) => p.id !== post.id && p.category === post.category)
+    .filter((p) => p.id !== post.id && typeof p.category === "string" && p.category === categoryLabel)
     .slice(0, 3);
 
   const renderContent = (html: string) => {
@@ -172,14 +173,17 @@ export function BlogPost() {
             <div className="mt-12 pt-8 border-t border-gray-100">
               <div className="flex items-center gap-2 flex-wrap">
                 <Tag size={14} className="text-gray-400" />
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 text-gray-500"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {post.tags.map((tag, index) => {
+                  const tagLabel = typeof tag === "string" ? tag : tag?.name || tag?.slug || String(tag);
+                  return (
+                    <span
+                      key={`${tagLabel}-${index}`}
+                      className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 text-gray-500"
+                    >
+                      {tagLabel}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           )}

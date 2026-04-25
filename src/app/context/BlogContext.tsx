@@ -75,6 +75,23 @@ export function BlogProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Transform backend API response to BlogPost format
+  const normalizeCategory = (category: any) => {
+    if (typeof category === "string") return category;
+    if (category?.name) return category.name;
+    if (category?.slug) return category.slug;
+    return "General";
+  };
+
+  const normalizeTags = (tags: any) => {
+    if (!Array.isArray(tags)) return [];
+    return tags.map((tag: any) => {
+      if (typeof tag === "string") return tag;
+      if (tag?.name) return tag.name;
+      if (tag?.slug) return tag.slug;
+      return String(tag);
+    });
+  };
+
   const transformPost = (apiPost: any): BlogPost => ({
     id: apiPost.id?.toString() || "",
     title: apiPost.title || "",
@@ -82,14 +99,8 @@ export function BlogProvider({ children }: { children: ReactNode }) {
     excerpt: apiPost.excerpt || "",
     content: apiPost.content || "",
     featuredImage: apiPost.image || "",
-    category:
-      apiPost.category_detail?.name ||
-      apiPost.category ||
-      "General",
-    tags:
-      Array.isArray(apiPost.tags_detail)
-        ? apiPost.tags_detail.map((tag: any) => tag.name ?? tag)
-        : apiPost.tags || [],
+    category: normalizeCategory(apiPost.category_detail ?? apiPost.category),
+    tags: normalizeTags(apiPost.tags_detail ?? apiPost.tags),
     author: apiPost.author || "",
     authorId: apiPost.author_id?.toString() || apiPost.id?.toString() || "",
     date: apiPost.created_at || new Date().toISOString(),
