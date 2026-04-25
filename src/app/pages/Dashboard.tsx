@@ -60,6 +60,8 @@ function PostEditor({
     e.preventDefault();
     setError("");
     if (!form.title.trim()) { setError("Title is required."); return; }
+
+    if (form.title.length > 150) { setError("Title must be 150 characters or less."); return; }
     if (!form.excerpt.trim()) { setError("Excerpt is required."); return; }
     if (!form.content.trim()) { setError("Content is required."); return; }
     onSave(form);
@@ -84,6 +86,7 @@ function PostEditor({
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               placeholder="Enter a compelling title..."
+              maxLength={150}
               className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all"
             />
             {form.title && (
@@ -91,6 +94,9 @@ function PostEditor({
                 Slug: /blog/{slugify(form.title)}
               </p>
             )}
+            <p className={`text-xs mt-1 ${form.title.length > 150 ? 'text-red-500' : 'text-gray-400'}`}>
+              {form.title.length}/150 characters
+            </p>
           </div>
 
           <div>
