@@ -130,7 +130,7 @@ export function Contact() {
                   </div>
                   <div className="space-y-2.5">
                     {[
-                      { day: "Monday – Friday", hours: "9:00 AM – 6:00 PM" },
+                      { day: "Monday – Friday", hours: "9:30 AM – 5:30 PM" },
                       { day: "Saturday", hours: "By Appointment" },
                       { day: "Sunday", hours: "Closed" },
                     ].map(({ day, hours }) => (
@@ -217,7 +217,7 @@ export function Contact() {
               { label: "Business & Corporate Law", href: "/business-law", icon: Briefcase },
               { label: "Civil Litigation", href: "/civil-litigation", icon: Gavel },
               { label: "Wills & Estates", href: "/wills-estates", icon: FileText },
-              { label: "Criminal Law", href: "/criminal-law", icon: Shield },
+              { label: "Criminal Law", href: "/criminal-defence", icon: Shield },
               { label: "Notary Services", href: "/notary", icon: CheckCircle },
             ].map((service, i) => {
               const Icon = service.icon;

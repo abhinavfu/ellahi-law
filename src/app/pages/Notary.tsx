@@ -125,6 +125,60 @@ export function Notary() {
           ))}
         </div>
 
+        {/* Pricing Section */}
+        <div className="mt-16 bg-blue-50 border border-blue-200 rounded-lg p-8">
+          <h2 className="text-3xl font-bold mb-8" style={{ color: "#0A2540", fontFamily: '"Playfair Display", serif' }}>
+            Notary & Commissioning Fees
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: "#0A2540" }}>Notary Public Services</h3>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex justify-between">
+                  <span>Standard Notarization (per document)</span>
+                  <span className="font-semibold">$25–$50</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Certified True Copies (per page)</span>
+                  <span className="font-semibold">$15–$25</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Urgent/Same-Day Service</span>
+                  <span className="font-semibold">Additional $25–$50</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Multiple Documents (package rate)</span>
+                  <span className="font-semibold">Contact for Quote</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: "#0A2540" }}>Commissioner of Oaths Services</h3>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex justify-between">
+                  <span>Affidavit/Statutory Declaration</span>
+                  <span className="font-semibold">$30–$60</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Court & Legal Forms</span>
+                  <span className="font-semibold">$25–$50</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Financial Documents (OSAP, etc.)</span>
+                  <span className="font-semibold">$20–$40</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Urgent/Same-Day Service</span>
+                  <span className="font-semibold">Additional $25–$50</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <p className="mt-6 text-sm text-gray-600 italic">
+            * Pricing varies based on document complexity and urgency. For a specific quote, contact us with details about your documents. Call <strong>(416) 551-1155</strong> or email <strong>info@ellahilaw.com</strong>.
+          </p>
+        </div>
+
         <ContactMessageCard contactMessage={`Need a Document Notarized Today? Call now to check same-day availability.`} />
       </div>
     </div>

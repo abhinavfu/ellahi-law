@@ -35,6 +35,26 @@ const REAL_ESTATE_LINKS = [
   { label: "Registration of Liens", href: "/real-estate/registration-liens" },
 ];
 
+const BUSINESS_LAW_LINKS = [
+  { label: "Business & Corporate Law", href: "/business-law" },
+];
+
+const CIVIL_LITIGATION_LINKS = [
+  { label: "Civil Litigation", href: "/civil-litigation" },
+];
+
+const WILLS_ESTATES_LINKS = [
+  { label: "Wills & Estates", href: "/wills-estates" },
+];
+
+const CRIMINAL_DEFENCE_LINKS = [
+  { label: "Criminal Defence", href: "/criminal-defence" },
+];
+
+const NOTARY_LINKS = [
+  { label: "Notary Services", href: "/notary" },
+];
+
 const SERVICE_LINKS = [
   { label: "Business & Corporate Law", href: "/business-law" },
   { label: "Civil Litigation", href: "/civil-litigation" },
@@ -47,7 +67,11 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Real Estate", href: "#", children: REAL_ESTATE_LINKS },
-  { label: "Services", href: "#", children: SERVICE_LINKS },
+  { label: "Business Law", href: "/business-law", children: BUSINESS_LAW_LINKS },
+  { label: "Civil Litigation", href: "/civil-litigation", children: CIVIL_LITIGATION_LINKS },
+  { label: "Wills & Estates", href: "/wills-estates", children: WILLS_ESTATES_LINKS },
+  { label: "Criminal Defence", href: "/criminal-defence", children: CRIMINAL_DEFENCE_LINKS },
+  { label: "Notary", href: "/notary", children: NOTARY_LINKS },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -144,7 +168,7 @@ export function Layout() {
                 link.children ? (
                   <div
                     key={link.label}
-                    className="relative"
+                    className="relative w-20"
                     onMouseEnter={() => setOpenDropdown(link.label)}
                     onMouseLeave={() => setOpenDropdown(null)}
                   >
@@ -436,57 +460,39 @@ export function Layout() {
             {/* Brand */}
             <div className="lg:col-span-1">
               {/* Logo */}
-              <Link to="/" className="flex items-center bg-white rounded p-2 mb-4">
+              <Link to="/" className="flex justify-center bg-white rounded mb-4">
                 <img
                   src="/images/logo.png"
                   alt="Ellahi Law Logo"
-                  className="h-10 lg:h-12 w-auto"
+                  className="h-20 w-auto"
                 />
               </Link>
 
-              <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-9 h-9 rounded bg-white/10 flex items-center justify-center">
-                  <span
-                    className="text-white text-sm font-bold"
-                    style={{ fontFamily: '"Playfair Display", serif' }}
-                  >
-                    EL
-                  </span>
-                </div>
-                <div>
-                  <div
-                    className="text-base font-semibold"
-                    style={{ fontFamily: '"Playfair Display", serif' }}
-                  >
-                    Ellahi Law
-                  </div>
-                  <div className="text-xs text-white/50 tracking-wider">PROFESSIONAL CORPORATION</div>
-                </div>
-              </div>
-              <p className="text-sm text-white/60 leading-relaxed mb-5">
+              <p className="text-sm mb-5" style={{ color: "#A8C5E0" }}>
                 Serving individuals, investors, and businesses across Ontario with practical, results-driven legal representation.
               </p>
               <div className="flex gap-3">
-                <a href={SOCIAL_linkedin} className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
-                  <Linkedin size={14} />
+                <a href={SOCIAL_linkedin} className="w-8 h-8 rounded" style={{ backgroundColor: "rgba(168, 197, 224, 0.2)" }} title="LinkedIn">
+                  <Linkedin size={14} className="w-full h-full p-2" style={{ color: "#A8C5E0" }} />
                 </a>
-                <a href={SOCIAL_facebook} className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
-                  <Facebook size={14} />
+                <a href={SOCIAL_facebook} className="w-8 h-8 rounded" style={{ backgroundColor: "rgba(168, 197, 224, 0.2)" }} title="Facebook">
+                  <Facebook size={14} className="w-full h-full p-2" style={{ color: "#A8C5E0" }} />
                 </a>
               </div>
             </div>
 
             {/* Real Estate Services */}
             <div>
-              <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
+              <h4 className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: "#A8C5E0" }}>
                 Real Estate Services
               </h4>
-              <div className="grid grid-cols-1 gap-y-2 text-sm text-white/60">
+              <div className="grid grid-cols-1 gap-y-2 text-sm">
                 {REAL_ESTATE_LINKS.map((link) => (
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="block hover:text-white transition-colors"
+                    className="block transition-colors hover:text-white"
+                    style={{ color: "#A8C5E0" }}
                   >
                     {link.label}
                   </Link>
@@ -497,15 +503,16 @@ export function Layout() {
             {/* Other Services */}
             <div>
               <div className="mb-12">
-                <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
+                <h4 className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: "#A8C5E0" }}>
                   Other Services
                 </h4>
-                <div className="grid grid-cols-1 gap-y-2 text-sm text-white/60">
+                <div className="grid grid-cols-1 gap-y-2 text-sm">
                   {SERVICE_LINKS.map((link) => (
                     <Link
                       key={link.href}
                       to={link.href}
-                      className="block hover:text-white transition-colors"
+                      className="block transition-colors hover:text-white"
+                      style={{ color: "#A8C5E0" }}
                     >
                       {link.label}
                     </Link>
@@ -515,7 +522,7 @@ export function Layout() {
 
               {/* Areas */}
               <div>
-                <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
+                <h4 className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: "#A8C5E0" }}>
                   Areas Served
                 </h4>
                 <ul className="space-y-2.5">
@@ -523,7 +530,7 @@ export function Layout() {
                     "Toronto", "Scarborough", "North York", "Markham",
                     "Richmond Hill",
                   ].map((city) => (
-                    <li key={city} className="text-sm text-white/60">
+                    <li key={city} className="text-sm" style={{ color: "#A8C5E0" }}>
                       {city}
                     </li>
                   ))}
@@ -533,14 +540,15 @@ export function Layout() {
 
             {/* Contact */}
             <div>
-              <h4 className="text-sm font-semibold tracking-widest uppercase mb-4 text-white/40">
+              <h4 className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: "#A8C5E0" }}>
                 Contact
               </h4>
               <ul className="space-y-3">
                 <li>
                   <a
                     href={PHONE_href}
-                    className="flex items-start gap-2.5 text-sm text-white/60 hover:text-white transition-colors"
+                    className="flex items-start gap-2.5 text-sm transition-colors hover:text-white"
+                    style={{ color: "#A8C5E0" }}
                   >
                     <Phone size={14} className="mt-0.5 flex-shrink-0" />
                     {PHONE}
@@ -549,7 +557,8 @@ export function Layout() {
                 <li>
                   <a
                     href={EMAIL_href}
-                    className="flex items-start gap-2.5 text-sm text-white/60 hover:text-white transition-colors"
+                    className="flex items-start gap-2.5 text-sm transition-colors hover:text-white"
+                    style={{ color: "#A8C5E0" }}
                   >
                     <Mail size={14} className="mt-0.5 flex-shrink-0" />
                     {EMAIL}
@@ -558,14 +567,15 @@ export function Layout() {
                 <li>
                   <a
                     href={FAX_href}
-                    className="flex items-start gap-2.5 text-sm text-white/60 hover:text-white transition-colors"
+                    className="flex items-start gap-2.5 text-sm transition-colors hover:text-white"
+                    style={{ color: "#A8C5E0" }}
                   >
                     <Printer size={14} className="mt-0.5 flex-shrink-0" />
                     {FAX}
                   </a>
                 </li>
                 <li>
-                  <div className="flex items-start gap-2.5 text-sm text-white/60">
+                  <div className="flex items-start gap-2.5 text-sm" style={{ color: "#A8C5E0" }}>
                     <MapPin size={14} className="mt-0.5 flex-shrink-0" />
                     <span>{ADDRESS}</span>
                   </div>
@@ -582,11 +592,11 @@ export function Layout() {
           </div>
 
           {/* Bottom bar */}
-          <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+          <div className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs" style={{ borderColor: "rgba(168, 197, 224, 0.2)", color: "#A8C5E0" }}>
             <p>© {new Date().getFullYear()} {TITLE}. All rights reserved.</p>
             <div className="flex items-center gap-4">
-              <Link to="/blog" className="hover:text-white/70 transition-colors">Blog</Link>
-              <Link to="/login" className="hover:text-white/70 transition-colors">Sign In</Link>
+              <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
+              <Link to="/login" className="hover:text-white transition-colors">Sign In</Link>
               <p>Toronto, Ontario, Canada</p>
             </div>
           </div>

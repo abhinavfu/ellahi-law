@@ -65,7 +65,7 @@ export function About() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
               { icon: Clock, value: "9+", label: "Years Experience" },
-              { icon: Users, value: "500+", label: "Clients Served" },
+              { icon: Users, value: "2000+", label: "Clients Served" },
               { icon: Award, value: "100%", label: "Client Commitment" },
               { icon: Star, value: "5.0", label: "Google Rating" },
             ].map(({ icon: Icon, value, label }) => (
@@ -295,6 +295,216 @@ export function About() {
         </div>
       </section>
 
+      {/* Business & Corporate Law Services */}
+      <section className="py-20 lg:py-24" style={{ backgroundColor: LIGHT_BG }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-12">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="h-px w-8" style={{ backgroundColor: BLUE }} />
+              <span className="text-sm tracking-widest uppercase" style={{ color: BLUE }}>
+                Business & Corporate Law
+              </span>
+              <div className="h-px w-8" style={{ backgroundColor: BLUE }} />
+            </div>
+            <h2
+              className="mb-4"
+              style={{
+                fontFamily: '"Playfair Display", serif',
+                color: NAVY,
+                fontSize: "clamp(1.7rem, 3vw, 2.3rem)",
+                fontWeight: 600,
+              }}
+            >
+              Supporting Your Business Growth
+            </h2>
+            <p className="max-w-2xl mx-auto" style={{ color: "#5A6A7A" }}>
+              From business incorporations to shareholder agreements, we provide practical corporate legal solutions tailored for entrepreneurs and growing businesses.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: Building, title: "Business Incorporations", href: "/business-law" },
+              { icon: FileText, title: "Shareholder Agreements", href: "/business-law" },
+              { icon: Shield, title: "Commercial Contracts", href: "/business-law" },
+              { icon: Target, title: "Corporate Governance", href: "/business-law" },
+            ].map(({ icon: Icon, title, href }) => (
+              <Link
+                key={title}
+                to={href}
+                className="group block rounded-3xl border border-gray-100 p-6 transition-shadow hover:shadow-xl hover:border-blue-200 bg-white"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-4">
+                  <Icon size={22} style={{ color: "#2D9CDB" }} />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
+                <p className="text-sm text-slate-600">Expert guidance for your business needs.</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Civil Litigation & Wills & Estates Services */}
+      <section className="py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <AnimatedSection className="mb-12">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="h-px w-8" style={{ backgroundColor: BLUE }} />
+                  <span className="text-sm tracking-widest uppercase" style={{ color: BLUE }}>
+                    Civil Litigation
+                  </span>
+                </div>
+                <h3
+                  className="mb-4"
+                  style={{
+                    fontFamily: '"Playfair Display", serif',
+                    color: NAVY,
+                    fontSize: "clamp(1.5rem, 2vw, 2rem)",
+                    fontWeight: 600,
+                  }}
+                >
+                  Strategic Dispute Resolution
+                </h3>
+                <p className="mb-4" style={{ color: "#5A6A7A" }}>
+                  We provide focused representation in contract disputes, real estate conflicts, debt recovery, and commercial litigation across Ontario.
+                </p>
+                <ul className="space-y-2">
+                  {[
+                    "Contract Disputes",
+                    "Real Estate Disputes",
+                    "Debt Recovery",
+                    "Commercial Litigation",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "#5A6A7A" }}>
+                      <CheckCircle size={14} style={{ color: BLUE }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </AnimatedSection>
+            </div>
+
+            <div>
+              <AnimatedSection className="mb-12" delay={0.1}>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="h-px w-8" style={{ backgroundColor: BLUE }} />
+                  <span className="text-sm tracking-widest uppercase" style={{ color: BLUE }}>
+                    Wills & Estates
+                  </span>
+                </div>
+                <h3
+                  className="mb-4"
+                  style={{
+                    fontFamily: '"Playfair Display", serif',
+                    color: NAVY,
+                    fontSize: "clamp(1.5rem, 2vw, 2rem)",
+                    fontWeight: 600,
+                  }}
+                >
+                  Protect Your Legacy
+                </h3>
+                <p className="mb-4" style={{ color: "#5A6A7A" }}>
+                  From will drafting to estate planning and probate applications, we help you protect your family and assets for the future.
+                </p>
+                <ul className="space-y-2">
+                  {[
+                    "Will & Testament Drafting",
+                    "Estate Planning",
+                    "Power of Attorney",
+                    "Probate Applications",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "#5A6A7A" }}>
+                      <CheckCircle size={14} style={{ color: BLUE }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </AnimatedSection>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Criminal Defence & Notary Services */}
+      <section className="py-20 lg:py-24" style={{ backgroundColor: LIGHT_BG }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <AnimatedSection className="mb-12">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="h-px w-8" style={{ backgroundColor: BLUE }} />
+                  <span className="text-sm tracking-widest uppercase" style={{ color: BLUE }}>
+                    Criminal Defence
+                  </span>
+                </div>
+                <h3
+                  className="mb-4"
+                  style={{
+                    fontFamily: '"Playfair Display", serif',
+                    color: NAVY,
+                    fontSize: "clamp(1.5rem, 2vw, 2rem)",
+                    fontWeight: 600,
+                  }}
+                >
+                  Dedicated Defence Representation
+                </h3>
+                <p className="mb-4" style={{ color: "#5A6A7A" }}>
+                  We provide strategic defence representation for criminal charges, ensuring your rights are protected throughout the legal process.
+                </p>
+                <Link
+                  to="/criminal-defence"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm font-medium text-white transition-all hover:opacity-90"
+                  style={{ backgroundColor: NAVY }}
+                >
+                  Learn More <ArrowRight size={14} />
+                </Link>
+              </AnimatedSection>
+            </div>
+
+            <div>
+              <AnimatedSection className="mb-12" delay={0.1}>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="h-px w-8" style={{ backgroundColor: BLUE }} />
+                  <span className="text-sm tracking-widest uppercase" style={{ color: BLUE }}>
+                    Notary & Commissioning
+                  </span>
+                </div>
+                <h3
+                  className="mb-4"
+                  style={{
+                    fontFamily: '"Playfair Display", serif',
+                    color: NAVY,
+                    fontSize: "clamp(1.5rem, 2vw, 2rem)",
+                    fontWeight: 600,
+                  }}
+                >
+                  Fast & Reliable Document Services
+                </h3>
+                <p className="mb-4" style={{ color: "#5A6A7A" }}>
+                  Same-day notarization and commissioner of oaths services for travel documents, affidavits, declarations, and more.
+                </p>
+                <ul className="space-y-2">
+                  {[
+                    "Notary Public Services",
+                    "Commissioner of Oaths",
+                    "Certified True Copies",
+                    "Same-Day Availability",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "#5A6A7A" }}>
+                      <CheckCircle size={14} style={{ color: BLUE }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </AnimatedSection>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us */}
       <section className="py-20 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -392,7 +602,7 @@ export function About() {
                       className="text-2xl font-bold"
                       style={{ fontFamily: '"Playfair Display", serif' }}
                     >
-                      500+
+                      2000+
                     </div>
                     <div className="text-xs text-white/60 mt-0.5">Legal Matters Handled</div>
                   </div>

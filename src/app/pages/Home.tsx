@@ -92,32 +92,28 @@ const SERVICES = [
     icon: HomeIcon,
     title: "Real Estate Law",
     desc: "We handle residential and commercial real estate transactions across Ontario with precision and care.",
-    href: "#",
-    // href: "/real-estate",
+    href: "/real-estate",
     items: ["Buying & Selling Property", "Mortgage Refinancing", "Title Transfers", "Commercial Real Estate"],
   },
   {
     icon: Briefcase,
     title: "Business & Corporate Law",
     desc: "Supporting entrepreneurs and businesses with practical legal foundations for growth.",
-    href: "#",
-    // href: "/business-law",
+    href: "/business-law",
     items: ["Business Incorporations", "Shareholder Agreements", "Commercial Contracts", "Corporate Governance"],
   },
   {
     icon: Scale,
     title: "Civil Litigation",
     desc: "Strategic representation focused on resolving disputes efficiently and effectively.",
-    href: "#",
-    // href: "/civil-litigation",
+    href: "/civil-litigation",
     items: ["Contract Disputes", "Real Estate Disputes", "Debt Recovery", "Commercial Litigation"],
   },
   {
     icon: FileText,
     title: "Wills & Estates",
     desc: "Planning ahead to protect your family, assets, and wishes for the future.",
-    href: "#",
-    // href: "/wills-estates",
+    href: "/wills-estates",
     items: ["Drafting Wills", "Estate Planning", "Power of Attorney", "Probate Applications"],
   },
 ];
@@ -465,7 +461,7 @@ function LandTransferTaxCalculator() {
   ].filter((b) => b.tax > 0);
 
   return (
-    <div className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 max-w-xl mx-auto">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#EBF5FC" }}>
           <FileText size={18} style={{ color: BLUE }} />
@@ -494,7 +490,7 @@ function LandTransferTaxCalculator() {
             value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
             className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
-            style={{ accentColor: BLUE }}
+            style={{ accentColor: BLUE, backgroundColor: BLUE }}
           />
         </div>
 
@@ -665,7 +661,7 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <TrustStat value={9} suffix="+" label="Years Experience" inView={trustInView} />
-            <TrustStat value={500} suffix="+" label="Transactions Handled" inView={trustInView} />
+            <TrustStat value={2000} suffix="+" label="Transactions Handled" inView={trustInView} />
             <TrustStat value={13} suffix="" label="Areas Served in GTA" inView={trustInView} />
             <TrustStat value={100} suffix="%" label="Client-Focused Service" inView={trustInView} />
           </div>
@@ -715,85 +711,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── About ── */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-            <AnimatedSection direction="left" className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/5] max-w-md mx-auto lg:mx-0">
-                <img
-                  src={LAWYER_IMG}
-                  alt="Ellahi Law — Principal Lawyer"
-                  className="w-full h-full object-cover"
-                />
-                {/* <div
-                  className="absolute bottom-5 left-5 right-5 p-4 rounded-xl backdrop-blur-sm"
-                  style={{ backgroundColor: "rgba(10,37,64,0.85)" }}
-                >
-                  <div className="flex items-center gap-1 mb-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={13} fill="#FBBF24" color="#FBBF24" />
-                    ))}
-                  </div>
-                  <p className="text-white text-xs">Google Rated 5.0 ★ — Toronto Real Estate Law</p>
-                </div> */}
-              </div>
-              {/* Decorative element */}
-              <div
-                className="absolute -bottom-5 -right-5 w-32 h-32 rounded-full -z-10 hidden lg:block"
-                style={{ backgroundColor: "#EBF5FC" }}
-              />
-            </AnimatedSection>
 
-            <AnimatedSection direction="right" delay={0.1}>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="h-px w-8" style={{ backgroundColor: BLUE }} />
-                <span className="text-sm tracking-widest uppercase" style={{ color: BLUE }}>
-                  About the Firm
-                </span>
-              </div>
-              <h2
-                className="mb-5"
-                style={{
-                  fontFamily: '"Playfair Display", serif',
-                  color: NAVY,
-                  fontSize: "clamp(1.8rem, 3vw, 2.4rem)",
-                  fontWeight: 600,
-                  lineHeight: 1.3,
-                }}
-              >
-                Practical, Results-Driven Legal Representation
-              </h2>
-              <p className="text-base leading-relaxed mb-5" style={{ color: "#5A6A7A" }}>
-                {TITLE} provides efficient and results-focused legal services to individuals, investors, and businesses across Ontario. With over <strong style={{ color: NAVY }}>9 years of experience</strong>, the firm has successfully handled hundreds of real estate transactions and legal matters.
-              </p>
-              <p className="text-base leading-relaxed mb-7" style={{ color: "#5A6A7A" }}>
-                We understand that legal matters often involve significant financial and personal decisions. Our goal is to guide clients through these matters with clarity, transparency, and confidence.
-              </p>
-              <ul className="space-y-3 mb-8">
-                {[
-                  "Responsive communication at every stage",
-                  "Practical legal strategies tailored to your needs",
-                  "Transparent processes with no surprises",
-                  "Reliable representation focused on results",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "#5A6A7A" }}>
-                    <CheckCircle size={16} className="flex-shrink-0 mt-0.5" style={{ color: BLUE }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to="/about" 
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md text-sm font-medium text-white transition-all hover:opacity-90"
-                style={{ backgroundColor: NAVY }}
-              >
-                Learn More <ArrowRight size={15} />
-              </Link>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
 
       {/* ── Reviews ── */}
       <section className="py-20 lg:py-28" style={{ backgroundColor: LIGHT_BG }}>
@@ -924,11 +842,8 @@ export function Home() {
               Plan your transaction with our interactive calculators based on current Ontario rates.
             </p>
           </AnimatedSection>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
             <AnimatedSection direction="left">
-              <ClosingCostCalculator />
-            </AnimatedSection>
-            <AnimatedSection direction="right" delay={0.1}>
               <LandTransferTaxCalculator />
             </AnimatedSection>
           </div>
@@ -1117,7 +1032,7 @@ export function Home() {
                   <div className="space-y-1">
                     <div className="flex justify-between text-sm">
                       <span style={{ color: "#5A6A7A" }}>Mon – Fri</span>
-                      <span style={{ color: NAVY }}>9:00 AM – 6:00 PM</span>
+                      <span style={{ color: NAVY }}>9:30 AM – 5:30 PM</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span style={{ color: "#5A6A7A" }}>Saturday</span>
