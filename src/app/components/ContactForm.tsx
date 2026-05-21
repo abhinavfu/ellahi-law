@@ -152,11 +152,11 @@ export function ContactForm() {
             style={{ color: formData.service ? "#1A1A1A" : "#9CA3AF" }}
           >
             <option value="">Select a service</option>
-            <option value="real-estate">Real Estate Law</option>
-            <option value="business">Business / Corporate Law</option>
-            <option value="litigation">Civil Litigation</option>
-            <option value="wills">Wills & Estates</option>
-            <option value="other">Other</option>
+            <option value="Real Estate Law">Real Estate Law</option>
+            <option value="Business / Corporate Law">Business / Corporate Law</option>
+            <option value="Civil Litigation">Civil Litigation</option>
+            <option value="Wills & Estates">Wills & Estates</option>
+            <option value="Other">Other</option>
           </select>
         </div>
       </div>
@@ -184,9 +184,9 @@ export function ContactForm() {
           style={{ color: formData.time ? "#1A1A1A" : "#9CA3AF" }}
         >
           <option value="">Select preferred time</option>
-          <option value="morning">Morning (9am – 12pm)</option>
-          <option value="afternoon">Afternoon (12pm – 5pm)</option>
-          <option value="evening">Evening (5pm – 7pm)</option>
+          <option value="Morning (9am – 12pm)">Morning (9am – 12pm)</option>
+          <option value="Afternoon (12pm – 5pm)">Afternoon (12pm – 5pm)</option>
+          <option value="Evening (5pm – 7pm)">Evening (5pm – 7pm)</option>
         </select>
       </div>
       {status === "error" && (
