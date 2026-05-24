@@ -200,12 +200,26 @@ export function WillsEstates() {
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
         a { text-decoration: none; }
         button { cursor: pointer; border: none; }
+        
+        @media (max-width: 768px) {
+          h1 { font-size: 28px !important; }
+          h2 { font-size: 22px !important; }
+          h3 { font-size: 18px !important; }
+          p { font-size: 14px !important; }
+        }
+        
+        @media (max-width: 640px) {
+          h1 { font-size: 24px !important; }
+          h2 { font-size: 20px !important; }
+          h3 { font-size: 16px !important; }
+          p { font-size: 13px !important; }
+        }
       `}</style>
 
       {/* HERO SECTION */}
-      <section style={{ background: `linear-gradient(135deg, ${COLORS.navy} 0%, ${COLORS.navyMid} 60%, #1e4a7a 100%)`, color: COLORS.white, padding: '80px 0 70px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ background: `linear-gradient(135deg, ${COLORS.navy} 0%, ${COLORS.navyMid} 60%, #1e4a7a 100%)`, color: COLORS.white, padding: 'clamp(40px, 10vw, 80px) 0', position: 'relative', overflow: 'hidden' }}>
         <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: '60px', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px', alignItems: 'center' }}>
             <div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(200,151,58,0.18)', border: '1px solid rgba(200,151,58,0.4)', color: COLORS.goldLight, padding: '6px 16px', borderRadius: '50px', fontSize: '13px', fontWeight: '600', letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '22px' }}>
                 ⚖️ Toronto & GTA Wills Lawyer
@@ -213,21 +227,21 @@ export function WillsEstates() {
               <h1 style={{ fontSize: 'clamp(32px, 4vw, 50px)', color: COLORS.white, marginBottom: '20px', fontWeight: '700' }}>
                 Protect Your Family With a <span style={{ color: COLORS.goldLight }}>Professionally Drafted Will</span>
               </h1>
-              <p style={{ fontSize: '18px', color: 'rgba(255,255,255,0.82)', marginBottom: '32px', fontWeight: '300' }}>
+              <p style={{ fontSize: 'clamp(15px, 2.5vw, 18px)', color: 'rgba(255,255,255,0.82)', marginBottom: '32px', fontWeight: '300' }}>
                 Flat-fee Wills with no hidden charges. Secure your legacy, protect your loved ones, and gain peace of mind — starting from <strong style={{ color: COLORS.goldLight }}>$500 + HST</strong>.
               </p>
-              <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-                <a href="#pricing" style={{ background: COLORS.gold, color: COLORS.white, padding: '14px 30px', borderRadius: '8px', fontWeight: '600', fontSize: '15px', transition: 'all 0.25s', display: 'inline-block' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; e.target.style.boxShadow = '0 8px 24px rgba(200,151,58,0.35)'; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
+              <div style={{ display: 'flex', gap: 'clamp(8px, 2vw, 14px)', flexWrap: 'wrap' }}>
+                <a href="#pricing" style={{ background: COLORS.gold, color: COLORS.white, padding: 'clamp(10px, 2vw, 14px) clamp(20px, 4vw, 30px)', borderRadius: '8px', fontWeight: '600', fontSize: 'clamp(13px, 2vw, 15px)', transition: 'all 0.25s', display: 'inline-block' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; e.target.style.boxShadow = '0 8px 24px rgba(200,151,58,0.35)'; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
                   View Pricing & Packages
                 </a>
-                <a href="#contact" style={{ background: 'transparent', color: COLORS.white, padding: '14px 30px', borderRadius: '8px', fontWeight: '600', fontSize: '15px', border: '2px solid rgba(255,255,255,0.45)', transition: 'all 0.25s', display: 'inline-block' }} onMouseOver={e => { e.target.style.background = 'rgba(255,255,255,0.12)'; e.target.style.borderColor = COLORS.white; }} onMouseOut={e => { e.target.style.background = 'transparent'; }}>
+                <a href="#contact" style={{ background: 'transparent', color: COLORS.white, padding: 'clamp(10px, 2vw, 14px) clamp(20px, 4vw, 30px)', borderRadius: '8px', fontWeight: '600', fontSize: 'clamp(13px, 2vw, 15px)', border: '2px solid rgba(255,255,255,0.45)', transition: 'all 0.25s', display: 'inline-block' }} onMouseOver={e => { e.target.style.background = 'rgba(255,255,255,0.12)'; e.target.style.borderColor = COLORS.white; }} onMouseOut={e => { e.target.style.background = 'transparent'; }}>
                   Free 15-Min Consultation
                 </a>
               </div>
             </div>
-            <div style={{ background: COLORS.white, borderRadius: '20px', padding: '32px 28px', boxShadow: '0 20px 60px rgba(13,34,64,0.16)', color: COLORS.text }}>
-              <h3 style={{ fontSize: '20px', color: COLORS.navy, marginBottom: '6px', fontFamily: "'Playfair Display', serif" }}>Book a Free Consultation</h3>
-              <p style={{ fontSize: '13px', color: COLORS.textMuted, marginBottom: '22px' }}>Speak with a Toronto Wills Lawyer today — no obligation.</p>
+            <div style={{ background: COLORS.white, borderRadius: '20px', padding: 'clamp(20px, 5vw, 32px)', boxShadow: '0 20px 60px rgba(13,34,64,0.16)', color: COLORS.text }}>
+              <h3 style={{ fontSize: 'clamp(18px, 2.5vw, 20px)', color: COLORS.navy, marginBottom: '6px', fontFamily: "'Playfair Display', serif" }}>Book a Free Consultation</h3>
+              <p style={{ fontSize: 'clamp(12px, 2vw, 13px)', color: COLORS.textMuted, marginBottom: '22px' }}>Speak with a Toronto Wills Lawyer today — no obligation.</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 0', borderBottom: `1px solid ${COLORS.border}`, fontSize: '14px' }}>
                 <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: COLORS.warmGrey, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>📞</div>
                 <div><strong style={{ display: 'block', fontSize: '13px', color: COLORS.textMuted, fontWeight: '500' }}>Call or Text</strong><span style={{ fontWeight: '600', color: COLORS.navy }}>416-551-1155</span></div>
@@ -254,9 +268,9 @@ export function WillsEstates() {
 
       {/* TRUST BAR */}
       <div style={{ background: COLORS.navy, borderTop: '1px solid rgba(200,151,58,0.2)', padding: '18px 0' }}>
-        <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'center', gap: '40px', flexWrap: 'wrap' }}>
+        <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
           {['✅ Flat-Fee Pricing — No Surprises', '🆓 Free 15-Min Consultation', '🌐 Virtual & In-Person Appointments', '🗣️ English, Urdu & Punjabi', '🍁 Serving All Ontario'].map((item, i) => (
-            <div key={i} style={{ color: 'rgba(255,255,255,0.85)', fontSize: '14px', fontWeight: '500' }}>
+            <div key={i} style={{ color: 'rgba(255,255,255,0.85)', fontSize: 'clamp(12px, 2vw, 14px)', fontWeight: '500' }}>
               {item}
             </div>
           ))}
@@ -264,8 +278,8 @@ export function WillsEstates() {
       </div>
 
       {/* WHY SECTION */}
-      <section style={{ background: COLORS.white, padding: '80px 0' }}>
-        <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
+      <section style={{ background: COLORS.white, padding: 'clamp(40px, 10vw, 80px) 0' }}>
+        <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'start' }}>
           <div>
             <span style={{ display: 'inline-block', background: 'rgba(200,151,58,0.12)', color: COLORS.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: '50px', marginBottom: '16px', border: '1px solid rgba(200,151,58,0.25)' }}>Estate Planning</span>
             <h2 style={{ fontSize: 'clamp(26px, 3vw, 38px)', color: COLORS.navy, marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>Why Every Ontario Resident Needs a Will</h2>
@@ -287,14 +301,14 @@ export function WillsEstates() {
       </section>
 
       {/* COMPARE SECTION */}
-      <section style={{ background: COLORS.warmGrey, padding: '80px 0' }}>
+      <section style={{ background: COLORS.warmGrey, padding: 'clamp(40px, 10vw, 80px) 0' }}>
         <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span style={{ display: 'inline-block', background: 'rgba(200,151,58,0.12)', color: COLORS.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: '50px', marginBottom: '16px', border: '1px solid rgba(200,151,58,0.25)' }}>Understanding Your Documents</span>
             <h2 style={{ fontSize: 'clamp(26px, 3vw, 38px)', color: COLORS.navy, marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>Last Will vs. Power of Attorney — What's the Difference?</h2>
             <p style={{ fontSize: '17px', color: COLORS.textMuted, maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>Both documents are essential parts of a complete estate plan. Here's what each one does for you and your family.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '28px' }}>
             {[
               {
                 tag: "After Your Passing",
@@ -309,13 +323,13 @@ export function WillsEstates() {
                 subtext: "Without a Power of Attorney in place, your family may need to apply to court for guardianship — a costly and time-consuming process that can be avoided with proper planning."
               }
             ].map((card, i) => (
-              <div key={i} style={{ background: COLORS.white, borderRadius: '20px', padding: '32px 28px', border: `1px solid ${COLORS.border}` }}>
+              <div key={i} style={{ background: COLORS.white, borderRadius: '20px', padding: 'clamp(20px, 5vw, 32px)', border: `1px solid ${COLORS.border}` }}>
                 <div style={{ display: 'inline-block', background: COLORS.navy, color: COLORS.goldLight, fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '3px 12px', borderRadius: '50px', marginBottom: '14px' }}>
                   {card.tag}
                 </div>
-                <h3 style={{ color: COLORS.navy, marginBottom: '14px', fontSize: '22px', fontFamily: "'Playfair Display', serif" }}>{card.title}</h3>
-                <p style={{ fontSize: '15px', color: COLORS.textMuted, lineHeight: '1.7' }}>{card.text}</p>
-                <p style={{ marginTop: '14px', color: COLORS.textMuted, fontSize: '14px' }}>{card.subtext}</p>
+                <h3 style={{ color: COLORS.navy, marginBottom: '14px', fontSize: 'clamp(18px, 3vw, 22px)', fontFamily: "'Playfair Display', serif" }}>{card.title}</h3>
+                <p style={{ fontSize: 'clamp(13px, 2vw, 15px)', color: COLORS.textMuted, lineHeight: '1.7' }}>{card.text}</p>
+                <p style={{ marginTop: '14px', color: COLORS.textMuted, fontSize: 'clamp(12px, 2vw, 14px)' }}>{card.subtext}</p>
               </div>
             ))}
           </div>
@@ -323,19 +337,19 @@ export function WillsEstates() {
       </section>
 
       {/* PRICING SECTION */}
-      <section id="pricing" style={{ background: COLORS.cream, padding: '80px 0' }}>
+      <section id="pricing" style={{ background: COLORS.cream, padding: 'clamp(40px, 10vw, 80px) 0' }}>
         <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span style={{ display: 'inline-block', background: 'rgba(200,151,58,0.12)', color: COLORS.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: '50px', marginBottom: '16px', border: '1px solid rgba(200,151,58,0.25)' }}>Transparent Flat-Fee Pricing</span>
             <h2 style={{ fontSize: 'clamp(26px, 3vw, 38px)', color: COLORS.navy, marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>Clear, Affordable Wills Lawyer Fees — No Hidden Charges</h2>
             <p style={{ fontSize: '17px', color: COLORS.textMuted, maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>Our pricing is fully transparent and Law Society compliant. What you see is exactly what you pay — inclusive of all law office disbursements.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginTop: '12px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginTop: '12px' }}>
             {pricingPlans.map((plan, i) => (
               <div key={i} style={{
                 background: plan.featured ? COLORS.navy : COLORS.white,
                 borderRadius: '20px',
-                padding: '36px 28px',
+                padding: 'clamp(20px, 5vw, 36px)',
                 border: plan.featured ? `2px solid ${COLORS.gold}` : `2px solid ${COLORS.border}`,
                 position: 'relative',
                 color: plan.featured ? COLORS.white : COLORS.text,
@@ -352,23 +366,23 @@ export function WillsEstates() {
                   e.currentTarget.style.boxShadow = 'none';
                 }
               }}>
-                {plan.featured && <div style={{ position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)', background: COLORS.gold, color: COLORS.white, fontSize: '12px', fontWeight: '700', letterSpacing: '0.06em', textTransform: 'uppercase', padding: '5px 18px', borderRadius: '50px' }}>
+                {plan.featured && <div style={{ position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)', background: COLORS.gold, color: COLORS.white, fontSize: 'clamp(10px, 2vw, 12px)', fontWeight: '700', letterSpacing: '0.06em', textTransform: 'uppercase', padding: '5px 18px', borderRadius: '50px' }}>
                   {plan.badge}
                 </div>}
-                <div style={{ fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', color: plan.featured ? COLORS.goldLight : COLORS.gold, marginBottom: '8px' }}>{plan.label}</div>
-                <div style={{ fontSize: '22px', fontWeight: '700', color: plan.featured ? COLORS.white : COLORS.navy, marginBottom: '20px', fontFamily: "'Playfair Display', serif" }}>{plan.name}</div>
+                <div style={{ fontSize: 'clamp(10px, 2vw, 12px)', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', color: plan.featured ? COLORS.goldLight : COLORS.gold, marginBottom: '8px' }}>{plan.label}</div>
+                <div style={{ fontSize: 'clamp(18px, 3vw, 22px)', fontWeight: '700', color: plan.featured ? COLORS.white : COLORS.navy, marginBottom: '20px', fontFamily: "'Playfair Display', serif" }}>{plan.name}</div>
                 <div style={{ marginBottom: '8px' }}>
-                  <span style={{ fontSize: '28px', fontWeight: '700', color: plan.featured ? COLORS.goldLight : COLORS.navy, fontFamily: "'Playfair Display', serif" }}>
+                  <span style={{ fontSize: '22px', fontWeight: '700', color: plan.featured ? COLORS.goldLight : COLORS.navy, fontFamily: "'Playfair Display', serif" }}>
                     {plan.price === 'Custom' ? 'Custom' : '$'}
                   </span>
-                  {plan.price !== 'Custom' && <span style={{ fontSize: '52px', fontWeight: '700', color: plan.featured ? COLORS.white : COLORS.navy, fontFamily: "'Playfair Display', serif", lineHeight: '1' }}>{plan.price}</span>}
-                  <div style={{ fontSize: '13px', color: plan.featured ? 'rgba(255,255,255,0.6)' : COLORS.textMuted, marginTop: '4px' }}>{plan.description}</div>
+                  {plan.price !== 'Custom' && <span style={{ fontSize: 'clamp(36px, 8vw, 52px)', fontWeight: '700', color: plan.featured ? COLORS.white : COLORS.navy, fontFamily: "'Playfair Display', serif", lineHeight: '1' }}>{plan.price}</span>}
+                  <div style={{ fontSize: 'clamp(11px, 2vw, 13px)', color: plan.featured ? 'rgba(255,255,255,0.6)' : COLORS.textMuted, marginTop: '4px' }}>{plan.description}</div>
                 </div>
-                {plan.save && <div style={{ background: plan.featured ? 'rgba(46,125,94,0.25)' : '#e8f5ed', color: plan.featured ? '#7de8b8' : COLORS.green, fontSize: '12px', fontWeight: '700', padding: '4px 12px', borderRadius: '50px', display: 'inline-block', marginBottom: '20px' }}>{plan.save}</div>}
+                {plan.save && <div style={{ background: plan.featured ? 'rgba(46,125,94,0.25)' : '#e8f5ed', color: plan.featured ? '#7de8b8' : COLORS.green, fontSize: 'clamp(10px, 2vw, 12px)', fontWeight: '700', padding: '4px 12px', borderRadius: '50px', display: 'inline-block', marginBottom: '20px' }}>{plan.save}</div>}
                 <div style={{ height: '1px', background: plan.featured ? 'rgba(255,255,255,0.15)' : COLORS.border, margin: '20px 0' }} />
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
                   {plan.features.map((feat, j) => (
-                    <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '14px', color: plan.featured ? 'rgba(255,255,255,0.8)' : COLORS.textMuted }}>
+                    <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(12px, 2vw, 14px)', color: plan.featured ? 'rgba(255,255,255,0.8)' : COLORS.textMuted }}>
                       <span style={{ color: plan.featured ? COLORS.goldLight : COLORS.green, fontWeight: '700', flexShrink: 0, marginTop: '2px' }}>
                         {feat.check ? '✓' : '✗'}
                       </span>
@@ -379,10 +393,10 @@ export function WillsEstates() {
                 <a href="mailto:info@ellahilaw.com" style={{
                   width: '100%',
                   textAlign: 'center',
-                  fontSize: '14px',
+                  fontSize: 'clamp(13px, 2vw, 14px)',
                   background: plan.featured ? COLORS.gold : COLORS.gold,
                   color: COLORS.white,
-                  padding: '14px 30px',
+                  padding: 'clamp(10px, 2vw, 14px) 30px',
                   borderRadius: '8px',
                   fontWeight: '600',
                   display: 'block',
@@ -398,24 +412,24 @@ export function WillsEstates() {
       </section>
 
       {/* POA SECTION */}
-      <section style={{ background: COLORS.white, padding: '80px 0' }}>
+      <section style={{ background: COLORS.white, padding: 'clamp(40px, 10vw, 80px) 0' }}>
         <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px' }}>
           <span style={{ display: 'inline-block', background: 'rgba(200,151,58,0.12)', color: COLORS.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: '50px', marginBottom: '16px', border: '1px solid rgba(200,151,58,0.25)' }}>Add-On Services</span>
           <h2 style={{ fontSize: 'clamp(26px, 3vw, 38px)', color: COLORS.navy, marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>Power of Attorney — Protect Yourself During Your Lifetime</h2>
-          <p style={{ fontSize: '17px', color: COLORS.textMuted, maxWidth: '640px', marginBottom: '36px' }}>A Power of Attorney is one of the most important documents you can have while you are still alive. It appoints a trusted person to make critical decisions on your behalf if you become incapacitated.</p>
+          <p style={{ fontSize: 'clamp(15px, 2.5vw, 17px)', color: COLORS.textMuted, maxWidth: '640px', marginBottom: '36px' }}>A Power of Attorney is one of the most important documents you can have while you are still alive. It appoints a trusted person to make critical decisions on your behalf if you become incapacitated.</p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px', marginBottom: '28px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '28px', marginBottom: '28px' }}>
             {poaServices.map((svc, i) => (
-              <div key={i} style={{ border: `2px solid ${COLORS.border}`, borderRadius: '20px', padding: '32px 28px', transition: 'all 0.3s' }} onMouseOver={e => { e.currentTarget.style.borderColor = COLORS.gold; }} onMouseOut={e => { e.currentTarget.style.borderColor = COLORS.border; }}>
-                <div style={{ fontSize: '32px', marginBottom: '16px' }}>{svc.icon}</div>
-                <h3 style={{ fontSize: '20px', color: COLORS.navy, marginBottom: '8px', fontFamily: "'Playfair Display', serif" }}>{svc.title}</h3>
-                <div style={{ display: 'inline-block', background: COLORS.warmGrey, color: COLORS.navy, fontSize: '22px', fontWeight: '700', fontFamily: "'Playfair Display', serif", padding: '6px 18px', borderRadius: '8px', margin: '12px 0 16px', border: `1px solid ${COLORS.border}` }}>
+              <div key={i} style={{ border: `2px solid ${COLORS.border}`, borderRadius: '20px', padding: 'clamp(20px, 5vw, 32px)', transition: 'all 0.3s' }} onMouseOver={e => { e.currentTarget.style.borderColor = COLORS.gold; }} onMouseOut={e => { e.currentTarget.style.borderColor = COLORS.border; }}>
+                <div style={{ fontSize: 'clamp(24px, 5vw, 32px)', marginBottom: '16px' }}>{svc.icon}</div>
+                <h3 style={{ fontSize: 'clamp(17px, 3vw, 20px)', color: COLORS.navy, marginBottom: '8px', fontFamily: "'Playfair Display', serif" }}>{svc.title}</h3>
+                <div style={{ display: 'inline-block', background: COLORS.warmGrey, color: COLORS.navy, fontSize: 'clamp(18px, 3vw, 22px)', fontWeight: '700', fontFamily: "'Playfair Display', serif", padding: '6px 18px', borderRadius: '8px', margin: '12px 0 16px', border: `1px solid ${COLORS.border}` }}>
                   {svc.price}
                 </div>
-                <p style={{ fontSize: '14px', color: COLORS.textMuted, marginBottom: '16px' }}>{svc.desc}</p>
+                <p style={{ fontSize: 'clamp(12px, 2vw, 14px)', color: COLORS.textMuted, marginBottom: '16px' }}>{svc.desc}</p>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {svc.items.map((item, j) => (
-                    <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: COLORS.textMuted }}>
+                    <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'clamp(11px, 2vw, 13px)', color: COLORS.textMuted }}>
                       <span style={{ color: COLORS.green, fontWeight: '700' }}>✓</span> {item}
                     </li>
                   ))}
@@ -424,12 +438,12 @@ export function WillsEstates() {
             ))}
           </div>
 
-          <div style={{ background: COLORS.warmGrey, borderRadius: '20px', padding: '24px 28px', border: `1px solid ${COLORS.border}`, display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+          <div style={{ background: COLORS.warmGrey, borderRadius: '20px', padding: 'clamp(16px, 4vw, 24px)', border: `1px solid ${COLORS.border}`, display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
             <div style={{ flex: 1, minWidth: '260px' }}>
-              <strong style={{ color: COLORS.navy, fontSize: '16px' }}>💡 Complete Estate Package — Best Value</strong>
-              <p style={{ color: COLORS.textMuted, fontSize: '14px', marginTop: '6px' }}>Bundle your Mirror Wills + both Powers of Attorney for a comprehensive estate plan. Contact us for a package quote.</p>
+              <strong style={{ color: COLORS.navy, fontSize: 'clamp(14px, 2.5vw, 16px)' }}>💡 Complete Estate Package — Best Value</strong>
+              <p style={{ color: COLORS.textMuted, fontSize: 'clamp(12px, 2vw, 14px)', marginTop: '6px' }}>Bundle your Mirror Wills + both Powers of Attorney for a comprehensive estate plan. Contact us for a package quote.</p>
             </div>
-            <a href="mailto:info@ellahilaw.com" style={{ background: COLORS.gold, color: COLORS.white, padding: '14px 30px', borderRadius: '8px', fontWeight: '600', whiteSpace: 'nowrap', transition: 'all 0.25s' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
+            <a href="mailto:info@ellahilaw.com" style={{ background: COLORS.gold, color: COLORS.white, padding: 'clamp(10px, 2vw, 14px) clamp(20px, 4vw, 30px)', borderRadius: '8px', fontWeight: '600', whiteSpace: 'nowrap', transition: 'all 0.25s', fontSize: 'clamp(12px, 2vw, 14px)' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
               Ask About Bundles
             </a>
           </div>
@@ -437,24 +451,24 @@ export function WillsEstates() {
       </section>
 
       {/* PROCESS SECTION */}
-      <section style={{ background: COLORS.white, padding: '80px 0' }}>
+      <section style={{ background: COLORS.white, padding: 'clamp(40px, 10vw, 80px) 0' }}>
         <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span style={{ display: 'inline-block', background: 'rgba(200,151,58,0.12)', color: COLORS.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: '50px', marginBottom: '16px', border: '1px solid rgba(200,151,58,0.25)' }}>Simple 4-Step Process</span>
             <h2 style={{ fontSize: 'clamp(26px, 3vw, 38px)', color: COLORS.navy, marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>How It Works at Ellahi Law</h2>
             <p style={{ fontSize: '17px', color: COLORS.textMuted, maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>Getting your will done is simpler than you think. We handle the legal complexity — you just need to share your wishes.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '24px' }}>
             {steps.map((step, i) => (
-              <div key={i} style={{ textAlign: 'center', padding: '28px 20px' }}>
+              <div key={i} style={{ textAlign: 'center', padding: 'clamp(16px, 4vw, 28px)' }}>
                 <div style={{
-                  width: '52px',
-                  height: '52px',
+                  width: 'clamp(40px, 8vw, 52px)',
+                  height: 'clamp(40px, 8vw, 52px)',
                   borderRadius: '50%',
                   background: COLORS.navy,
                   color: COLORS.goldLight,
                   fontFamily: "'Playfair Display', serif",
-                  fontSize: '22px',
+                  fontSize: 'clamp(18px, 3vw, 22px)',
                   fontWeight: '700',
                   display: 'flex',
                   alignItems: 'center',
@@ -463,8 +477,8 @@ export function WillsEstates() {
                 }}>
                   {step.num}
                 </div>
-                <h3 style={{ fontSize: '17px', color: COLORS.navy, marginBottom: '10px', fontFamily: "'Playfair Display', serif" }}>{step.title}</h3>
-                <p style={{ fontSize: '14px', color: COLORS.textMuted }}>{step.desc}</p>
+                <h3 style={{ fontSize: 'clamp(15px, 2.5vw, 17px)', color: COLORS.navy, marginBottom: '10px', fontFamily: "'Playfair Display', serif" }}>{step.title}</h3>
+                <p style={{ fontSize: 'clamp(12px, 2vw, 14px)', color: COLORS.textMuted }}>{step.desc}</p>
               </div>
             ))}
           </div>
@@ -473,26 +487,26 @@ export function WillsEstates() {
 
       {/* INTESTATE SECTION */}
       <section style={{ background: COLORS.navy, color: COLORS.white, padding: '60px 0' }}>
-        <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+        <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
           <div>
-            <h2 style={{ color: COLORS.white, marginBottom: '18px', fontFamily: "'Playfair Display', serif" }}>What Happens If You Die Without a Will in Ontario?</h2>
-            <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '16px', marginBottom: '14px' }}>Dying without a will — known as dying "intestate" — means Ontario's Succession Law Reform Act determines who receives your estate. This rigid formula rarely reflects what you would have chosen, and can leave your loved ones with serious consequences:</p>
+            <h2 style={{ color: COLORS.white, marginBottom: '18px', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(22px, 3vw, 32px)' }}>What Happens If You Die Without a Will in Ontario?</h2>
+            <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 'clamp(14px, 2.5vw, 16px)', marginBottom: '14px' }}>Dying without a will — known as dying "intestate" — means Ontario's Succession Law Reform Act determines who receives your estate. This rigid formula rarely reflects what you would have chosen, and can leave your loved ones with serious consequences:</p>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {intestateWarnings.map((warn, i) => (
-                <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '15px', color: 'rgba(255,255,255,0.85)' }}>
-                  <span style={{ color: '#ff9f5a', fontSize: '16px', flexShrink: 0 }}>⚠️</span>
+                <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 2vw, 15px)', color: 'rgba(255,255,255,0.85)' }}>
+                  <span style={{ color: '#ff9f5a', fontSize: 'clamp(14px, 2vw, 16px)', flexShrink: 0 }}>⚠️</span>
                   {warn}
                 </li>
               ))}
             </ul>
           </div>
-          <div style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(200,151,58,0.3)', borderRadius: '20px', padding: '36px 32px' }}>
-            <h3 style={{ color: COLORS.goldLight, marginBottom: '14px', fontSize: '22px', fontFamily: "'Playfair Display', serif" }}>Don't Leave It to Chance</h3>
-            <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '24px', fontSize: '15px' }}>A professionally drafted will from Ellahi Law starts at just $500 + HST — a small investment to protect everything you've built and everyone you love.</p>
-            <a href="mailto:Info@ellahilaw.com" style={{ width: '100%', background: COLORS.gold, color: COLORS.white, padding: '14px 30px', borderRadius: '8px', fontWeight: '600', fontSize: '15px', display: 'block', textAlign: 'center', marginBottom: '12px', transition: 'all 0.25s' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
+          <div style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(200,151,58,0.3)', borderRadius: '20px', padding: 'clamp(20px, 5vw, 36px)' }}>
+            <h3 style={{ color: COLORS.goldLight, marginBottom: '14px', fontSize: 'clamp(18px, 3vw, 22px)', fontFamily: "'Playfair Display', serif" }}>Don't Leave It to Chance</h3>
+            <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '24px', fontSize: 'clamp(13px, 2.5vw, 15px)' }}>A professionally drafted will from Ellahi Law starts at just $500 + HST — a small investment to protect everything you've built and everyone you love.</p>
+            <a href="mailto:Info@ellahilaw.com" style={{ width: '100%', background: COLORS.gold, color: COLORS.white, padding: 'clamp(10px, 2vw, 14px) 30px', borderRadius: '8px', fontWeight: '600', fontSize: 'clamp(13px, 2vw, 15px)', display: 'block', textAlign: 'center', marginBottom: '12px', transition: 'all 0.25s' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
               Book Free Consultation →
             </a>
-            <a href="tel:+14165511155" style={{ display: 'block', textAlign: 'center', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>
+            <a href="tel:+14165511155" style={{ display: 'block', textAlign: 'center', color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(12px, 2vw, 14px)' }}>
               Or call us: <span style={{ color: COLORS.goldLight, fontWeight: '600' }}>416-551-1155</span>
             </a>
           </div>
@@ -500,13 +514,13 @@ export function WillsEstates() {
       </section>
 
       {/* PROBATE SECTION */}
-      <section style={{ background: COLORS.white, padding: '80px 0' }}>
-        <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'start' }}>
+      <section style={{ background: COLORS.white, padding: 'clamp(40px, 10vw, 80px) 0' }}>
+        <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px', alignItems: 'start' }}>
           <div>
             <span style={{ display: 'inline-block', background: 'rgba(200,151,58,0.12)', color: COLORS.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: '50px', marginBottom: '16px', border: '1px solid rgba(200,151,58,0.25)' }}>Estate Administration</span>
             <h2 style={{ fontSize: 'clamp(26px, 3vw, 38px)', color: COLORS.navy, marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>Probate Assistance in Ontario</h2>
-            <p style={{ color: COLORS.textMuted, fontSize: '16px', marginBottom: '16px' }}>If you are managing a loved one's estate, you may need to apply for a Certificate of Appointment of Estate Trustee — commonly known as probate. While you are not legally required to use a lawyer, a probate lawyer ensures your application is complete, accurate, and processed as quickly as possible.</p>
-            <p style={{ color: COLORS.textMuted, fontSize: '16px', marginBottom: '24px' }}>Ellahi Law assists estate trustees with probate applications, estate tax advice, asset distribution, and navigating the complexities of Ontario's estate administration process.</p>
+            <p style={{ color: COLORS.textMuted, fontSize: 'clamp(14px, 2.5vw, 16px)', marginBottom: '16px' }}>If you are managing a loved one's estate, you may need to apply for a Certificate of Appointment of Estate Trustee — commonly known as probate. While you are not legally required to use a lawyer, a probate lawyer ensures your application is complete, accurate, and processed as quickly as possible.</p>
+            <p style={{ color: COLORS.textMuted, fontSize: 'clamp(14px, 2.5vw, 16px)', marginBottom: '24px' }}>Ellahi Law assists estate trustees with probate applications, estate tax advice, asset distribution, and navigating the complexities of Ontario's estate administration process.</p>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {[
                 { text: 'When is probate required in Ontario?', link: '#' },
@@ -516,18 +530,18 @@ export function WillsEstates() {
                 { text: 'Ontario Government: What to do when someone dies', link: 'https://www.ontario.ca/page/what-do-when-someone-dies', external: true }
               ].map((item, i) => (
                 <li key={i}>
-                  <a href={item.link} style={{ display: 'flex', alignItems: 'center', gap: '10px', background: COLORS.warmGrey, padding: '14px 18px', borderRadius: '12px', fontSize: '14px', color: COLORS.navy, fontWeight: '500', border: `1px solid ${COLORS.border}`, transition: 'all 0.2s' }} onMouseOver={e => { e.currentTarget.style.background = COLORS.navy; e.currentTarget.style.color = COLORS.goldLight; e.currentTarget.style.borderColor = COLORS.navy; }} onMouseOut={e => { e.currentTarget.style.background = COLORS.warmGrey; e.currentTarget.style.color = COLORS.navy; e.currentTarget.style.borderColor = COLORS.border; }}>
+                  <a href={item.link} style={{ display: 'flex', alignItems: 'center', gap: '10px', background: COLORS.warmGrey, padding: 'clamp(10px, 2vw, 14px) clamp(12px, 3vw, 18px)', borderRadius: '12px', fontSize: 'clamp(12px, 2vw, 14px)', color: COLORS.navy, fontWeight: '500', border: `1px solid ${COLORS.border}`, transition: 'all 0.2s' }} onMouseOver={e => { e.currentTarget.style.background = COLORS.navy; e.currentTarget.style.color = COLORS.goldLight; e.currentTarget.style.borderColor = COLORS.navy; }} onMouseOut={e => { e.currentTarget.style.background = COLORS.warmGrey; e.currentTarget.style.color = COLORS.navy; e.currentTarget.style.borderColor = COLORS.border; }}>
                     {item.text} <span style={{ marginLeft: 'auto' }}>→</span>
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-          <div style={{ background: COLORS.warmGrey, borderRadius: '20px', padding: '32px', border: `1px solid ${COLORS.border}` }}>
-            <h3 style={{ color: COLORS.navy, marginBottom: '16px', fontSize: '22px', fontFamily: "'Playfair Display', serif" }}>What Is a Codicil?</h3>
-            <p style={{ color: COLORS.textMuted, fontSize: '15px', marginBottom: '14px' }}>A <strong>Codicil</strong> is a formal amendment to an existing Will. It is used to make minor changes — such as adding or removing a beneficiary, updating your executor, or reflecting a change in assets — without requiring an entirely new will to be drafted.</p>
-            <p style={{ color: COLORS.textMuted, fontSize: '15px', marginBottom: '14px' }}>If your life circumstances have changed since you last made your will (marriage, divorce, new children, new property), contact Ellahi Law to discuss whether a Codicil or an updated Will is the right approach.</p>
-            <a href="mailto:info@ellahilaw.com" style={{ background: COLORS.gold, color: COLORS.white, padding: '14px 30px', borderRadius: '8px', fontWeight: '600', display: 'inline-block', marginTop: '8px', transition: 'all 0.25s' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
+          <div style={{ background: COLORS.warmGrey, borderRadius: '20px', padding: 'clamp(20px, 5vw, 32px)', border: `1px solid ${COLORS.border}` }}>
+            <h3 style={{ color: COLORS.navy, marginBottom: '16px', fontSize: 'clamp(18px, 3vw, 22px)', fontFamily: "'Playfair Display', serif" }}>What Is a Codicil?</h3>
+            <p style={{ color: COLORS.textMuted, fontSize: 'clamp(13px, 2.5vw, 15px)', marginBottom: '14px' }}>A <strong>Codicil</strong> is a formal amendment to an existing Will. It is used to make minor changes — such as adding or removing a beneficiary, updating your executor, or reflecting a change in assets — without requiring an entirely new will to be drafted.</p>
+            <p style={{ color: COLORS.textMuted, fontSize: 'clamp(13px, 2.5vw, 15px)', marginBottom: '14px' }}>If your life circumstances have changed since you last made your will (marriage, divorce, new children, new property), contact Ellahi Law to discuss whether a Codicil or an updated Will is the right approach.</p>
+            <a href="mailto:info@ellahilaw.com" style={{ background: COLORS.gold, color: COLORS.white, padding: 'clamp(10px, 2vw, 14px) 30px', borderRadius: '8px', fontWeight: '600', display: 'inline-block', marginTop: '8px', transition: 'all 0.25s', fontSize: 'clamp(12px, 2vw, 14px)' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
               Update My Existing Will
             </a>
           </div>
@@ -535,28 +549,28 @@ export function WillsEstates() {
       </section>
 
       {/* LANGUAGES BAR */}
-      <div style={{ background: COLORS.gold, padding: '20px 0', textAlign: 'center' }}>
-        <p style={{ color: COLORS.white, fontSize: '16px', fontWeight: '500' }}>
+      <div style={{ background: COLORS.gold, padding: 'clamp(12px, 3vw, 20px) 0', textAlign: 'center' }}>
+        <p style={{ color: COLORS.white, fontSize: 'clamp(13px, 2.5vw, 16px)', fontWeight: '500', padding: '0 24px' }}>
           🌐 <strong>We serve clients Ontario-wide:</strong> Estate planning consultations available in English, Urdu & Punjabi | Virtual & In-Person Appointments Available Across Ontario
         </p>
       </div>
 
       {/* FAQ SECTION */}
-      <section style={{ background: COLORS.cream, padding: '80px 0' }}>
+      <section style={{ background: COLORS.cream, padding: 'clamp(40px, 10vw, 80px) 0' }}>
         <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span style={{ display: 'inline-block', background: 'rgba(200,151,58,0.12)', color: COLORS.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: '50px', marginBottom: '16px', border: '1px solid rgba(200,151,58,0.25)' }}>Frequently Asked Questions</span>
             <h2 style={{ fontSize: 'clamp(26px, 3vw, 38px)', color: COLORS.navy, marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>Wills & Estates — Common Questions Answered</h2>
-            <p style={{ fontSize: '17px', color: COLORS.textMuted, maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>Have more questions? Contact us for a free 15-minute consultation with a Toronto Wills Lawyer.</p>
+            <p style={{ fontSize: 'clamp(15px, 2.5vw, 17px)', color: COLORS.textMuted, maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>Have more questions? Contact us for a free 15-minute consultation with a Toronto Wills Lawyer.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
             {faqItems.map((item, i) => (
-              <div key={i} style={{ background: COLORS.white, borderRadius: '12px', padding: '24px 24px', border: `1px solid ${COLORS.border}` }}>
-                <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', fontWeight: '600', color: COLORS.navy, marginBottom: '10px', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                  <span style={{ background: COLORS.gold, color: 'white', width: '22px', height: '22px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '700', flexShrink: 0, marginTop: '1px' }}>Q</span>
+              <div key={i} style={{ background: COLORS.white, borderRadius: '12px', padding: 'clamp(16px, 3vw, 24px)', border: `1px solid ${COLORS.border}` }}>
+                <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 'clamp(13px, 2.5vw, 15px)', fontWeight: '600', color: COLORS.navy, marginBottom: '10px', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <span style={{ background: COLORS.gold, color: 'white', width: '22px', height: '22px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'clamp(10px, 2vw, 12px)', fontWeight: '700', flexShrink: 0, marginTop: '1px' }}>Q</span>
                   {item.q}
                 </h4>
-                <p style={{ fontSize: '14px', color: COLORS.textMuted, lineHeight: '1.65', paddingLeft: '32px' }}>{item.a}</p>
+                <p style={{ fontSize: 'clamp(12px, 2vw, 14px)', color: COLORS.textMuted, lineHeight: '1.65', paddingLeft: '32px' }}>{item.a}</p>
               </div>
             ))}
           </div>
@@ -564,37 +578,37 @@ export function WillsEstates() {
       </section>
 
       {/* FINAL CTA */}
-      <section style={{ background: `linear-gradient(135deg, ${COLORS.navy} 0%, ${COLORS.navyMid} 100%)`, padding: '80px 0', textAlign: 'center', color: COLORS.white }}>
+      <section style={{ background: `linear-gradient(135deg, ${COLORS.navy} 0%, ${COLORS.navyMid} 100%)`, padding: 'clamp(40px, 10vw, 80px) 0', textAlign: 'center', color: COLORS.white }}>
         <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px' }}>
-          <h2 style={{ color: COLORS.white, marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>Secure Your Family's Future Today</h2>
-          <p style={{ color: 'rgba(255,255,255,0.75)', marginBottom: '36px', fontSize: '17px', maxWidth: '560px', margin: '0 auto 36px' }}>Don't put it off. A professionally drafted will from Ellahi Law starts at $500 + HST. Book your free 15-minute consultation — no pressure, no obligation.</p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="mailto:Info@ellahilaw.com" style={{ background: COLORS.gold, color: COLORS.white, padding: '14px 30px', borderRadius: '8px', fontWeight: '600', fontSize: '15px', transition: 'all 0.25s' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
+          <h2 style={{ color: COLORS.white, marginBottom: '16px', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(22px, 3vw, 32px)' }}>Secure Your Family's Future Today</h2>
+          <p style={{ color: 'rgba(255,255,255,0.75)', marginBottom: '36px', fontSize: 'clamp(14px, 2.5vw, 17px)', maxWidth: '560px', margin: '0 auto 36px' }}>Don't put it off. A professionally drafted will from Ellahi Law starts at $500 + HST. Book your free 15-minute consultation — no pressure, no obligation.</p>
+          <div style={{ display: 'flex', gap: 'clamp(8px, 2vw, 16px)', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="mailto:Info@ellahilaw.com" style={{ background: COLORS.gold, color: COLORS.white, padding: 'clamp(10px, 2vw, 14px) clamp(20px, 4vw, 30px)', borderRadius: '8px', fontWeight: '600', fontSize: 'clamp(13px, 2vw, 15px)', transition: 'all 0.25s' }} onMouseOver={e => { e.target.style.background = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = COLORS.gold; }}>
               📧 Email Us to Get Started
             </a>
-            <a href="tel:+14165511155" style={{ background: 'transparent', color: COLORS.white, padding: '14px 30px', borderRadius: '8px', fontWeight: '600', fontSize: '15px', border: '2px solid rgba(255,255,255,0.45)', transition: 'all 0.25s' }} onMouseOver={e => { e.target.style.background = 'rgba(255,255,255,0.12)'; e.target.style.borderColor = COLORS.white; }} onMouseOut={e => { e.target.style.background = 'transparent'; }}>
+            <a href="tel:+14165511155" style={{ background: 'transparent', color: COLORS.white, padding: 'clamp(10px, 2vw, 14px) clamp(20px, 4vw, 30px)', borderRadius: '8px', fontWeight: '600', fontSize: 'clamp(13px, 2vw, 15px)', border: '2px solid rgba(255,255,255,0.45)', transition: 'all 0.25s' }} onMouseOver={e => { e.target.style.background = 'rgba(255,255,255,0.12)'; e.target.style.borderColor = COLORS.white; }} onMouseOut={e => { e.target.style.background = 'transparent'; }}>
               📞 Call 416-551-1155
             </a>
           </div>
-          <p style={{ marginTop: '28px', fontSize: '13px', color: 'rgba(255,255,255,0.4)' }}>Ellahi Law Professional Corporation — Proudly Serving Clients Across All of Ontario</p>
+          <p style={{ marginTop: '28px', fontSize: 'clamp(11px, 2vw, 13px)', color: 'rgba(255,255,255,0.4)' }}>Ellahi Law Professional Corporation — Proudly Serving Clients Across All of Ontario</p>
         </div>
       </section>
 
       {/* SERVICE AREAS */}
-      <section style={{ background: COLORS.navy, padding: '48px 0', borderTop: '1px solid rgba(200,151,58,0.15)' }}>
+      <section style={{ background: COLORS.navy, padding: 'clamp(30px, 8vw, 48px) 0', borderTop: '1px solid rgba(200,151,58,0.15)' }}>
         <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-            <span style={{ display: 'inline-block', background: 'rgba(200,151,58,0.15)', color: COLORS.goldLight, fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: '50px', marginBottom: '16px', border: '1px solid rgba(200,151,58,0.3)' }}>Ontario-Wide Service</span>
-            <h2 style={{ color: COLORS.white, fontSize: '26px', marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>Wills & Estates Lawyer Serving All of Ontario</h2>
-            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '15px', maxWidth: '620px', margin: '0 auto' }}>Ellahi Law provides professional will drafting, power of attorney, and estate planning services to clients across Ontario — virtually or in-person.</p>
+            <span style={{ display: 'inline-block', background: 'rgba(200,151,58,0.15)', color: COLORS.goldLight, fontSize: 'clamp(10px, 2vw, 12px)', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: '50px', marginBottom: '16px', border: '1px solid rgba(200,151,58,0.3)' }}>Ontario-Wide Service</span>
+            <h2 style={{ color: COLORS.white, fontSize: 'clamp(20px, 3vw, 26px)', marginBottom: '16px', fontFamily: "'Playfair Display', serif" }}>Wills & Estates Lawyer Serving All of Ontario</h2>
+            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 'clamp(13px, 2.5vw, 15px)', maxWidth: '620px', margin: '0 auto' }}>Ellahi Law provides professional will drafting, power of attorney, and estate planning services to clients across Ontario — virtually or in-person.</p>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
             {serviceAreas.map((area, i) => (
-              <a key={i} href="#contact" style={{ background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.8)', padding: '7px 16px', borderRadius: '50px', fontSize: '13px', fontWeight: '500', border: '1px solid rgba(255,255,255,0.12)', textDecoration: 'none', transition: 'all 0.2s' }} onMouseOver={e => { e.target.style.background = 'rgba(200,151,58,0.25)'; e.target.style.color = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = 'rgba(255,255,255,0.07)'; e.target.style.color = 'rgba(255,255,255,0.8)'; }}>
+              <a key={i} href="#contact" style={{ background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.8)', padding: 'clamp(5px, 1vw, 7px) clamp(10px, 2vw, 16px)', borderRadius: '50px', fontSize: 'clamp(11px, 2vw, 13px)', fontWeight: '500', border: '1px solid rgba(255,255,255,0.12)', textDecoration: 'none', transition: 'all 0.2s' }} onMouseOver={e => { e.target.style.background = 'rgba(200,151,58,0.25)'; e.target.style.color = COLORS.goldLight; }} onMouseOut={e => { e.target.style.background = 'rgba(255,255,255,0.07)'; e.target.style.color = 'rgba(255,255,255,0.8)'; }}>
                 {area}
               </a>
             ))}
-            <span style={{ background: 'rgba(200,151,58,0.25)', color: COLORS.goldLight, padding: '7px 16px', borderRadius: '50px', fontSize: '13px', fontWeight: '700', border: '1px solid rgba(200,151,58,0.5)' }}>Ontario Province-Wide</span>
+            <span style={{ background: 'rgba(200,151,58,0.25)', color: COLORS.goldLight, padding: 'clamp(5px, 1vw, 7px) clamp(10px, 2vw, 16px)', borderRadius: '50px', fontSize: 'clamp(11px, 2vw, 13px)', fontWeight: '700', border: '1px solid rgba(200,151,58,0.5)' }}>Ontario Province-Wide</span>
           </div>
         </div>
       </section>
